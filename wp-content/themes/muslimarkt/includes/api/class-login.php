@@ -11,7 +11,7 @@ namespace Muslimarkt\Rest;
 
 use Muslimarkt\Auth;
 use Muslimarkt\Singleton;
-use Muslimarkt\User;
+use Muslimarkt\Model\User;
 use WP_REST_Request;
 
 if ( ! defined( 'ABSPATH' ) ) {

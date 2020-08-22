@@ -74,7 +74,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 			} else {
 
 				// Get user detail.
-				$user = new \Muslimarkt\User( $auth->user_id );
+				$user = new \Muslimarkt\Model\User( $auth->user_id );
 
 				// Display user success.
 				wp_send_json_success( $user->items );
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 			$auth = new Auth( $request );
 
 			// Process create a user.
-			$user = new \Muslimarkt\User( false, $auth->get_args() );
+			$user = new \Muslimarkt\Model\User( false, $auth->get_args() );
 
 			// Validate the process.
 			if ( $user->is_error ) {
@@ -130,7 +130,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 			} else {
 
 				// Instance a new user.
-				$user = new \Muslimarkt\User( $auth->user_id, array(), true );
+				$user = new \Muslimarkt\Model\User( $auth->user_id, array(), true );
 
 				// Update the user.
 				$user->update( $auth->get_args() );

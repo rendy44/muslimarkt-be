@@ -8,15 +8,17 @@
  * @version 0.0.1
  */
 
-namespace Muslimarkt;
+namespace Muslimarkt\Model;
 
+use Muslimarkt\Helper;
+use Muslimarkt\Result;
 use WP_User;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Muslimarkt\User' ) ) {
+if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 
 	/**
 	 * Class User

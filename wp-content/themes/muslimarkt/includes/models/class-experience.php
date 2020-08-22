@@ -7,13 +7,16 @@
  * @version 0.0.1
  */
 
-namespace Muslimarkt;
+namespace Muslimarkt\Model;
+
+use Muslimarkt\Auth;
+use Muslimarkt\Post;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Muslimarkt\Experience' ) ) {
+if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 
 	/**
 	 * Class Experience
