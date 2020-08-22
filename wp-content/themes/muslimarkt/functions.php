@@ -18,13 +18,14 @@ defined( 'TEMP_PATH' ) || define( 'TEMP_PATH', get_theme_file_path() );
 defined( 'TEMP_PREFIX' ) || define( 'TEMP_PREFIX', 'mslmrkt_' );
 
 // Require the dependency classes.
-require_once TEMP_DIR . '/includes/class-helper.php';
 require_once TEMP_DIR . '/includes/traits/class-result.php';
 require_once TEMP_DIR . '/includes/traits/class-singleton.php';
+require_once TEMP_DIR . '/includes/class-helper.php';
+require_once TEMP_DIR . '/includes/class-auth.php';
+require_once TEMP_DIR . '/includes/class-setting.php';
 require_once TEMP_DIR . '/includes/abstracts/class-post.php';
 require_once TEMP_DIR . '/includes/abstracts/class-rest.php';
 require_once TEMP_DIR . '/includes/api/class-login.php';
 require_once TEMP_DIR . '/includes/api/class-user.php';
-require_once TEMP_DIR . '/includes/class-auth.php';
-require_once TEMP_DIR . '/includes/class-user.php';
-require_once TEMP_DIR . '/includes/class-experience.php';
+require_once TEMP_DIR . '/includes/models/class-user.php';
+require_once TEMP_DIR . '/includes/models/class-experience.php';

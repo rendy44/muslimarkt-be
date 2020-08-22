@@ -49,7 +49,7 @@ if ( ! class_exists( 'Muslimarkt\Experience' ) ) {
 		}
 
 		/**
-		 * Sava experience detail.
+		 * Save experience detail.
 		 *
 		 * @param array $args associate key=>value detail.
 		 */
