@@ -25,6 +25,11 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 	 */
 	final class Experience extends Post {
 
+		/**
+		 * Experience allowed meta.
+		 *
+		 * @var array
+		 */
 		private $used_fields = array(
 			'position',
 			'company',
@@ -41,14 +46,20 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 		);
 
 		/**
+		 * Override post type variable.
+		 *
+		 * @var string
+		 */
+		public $post_type = 'experience';
+
+		/**
 		 * Experience constructor.
 		 *
 		 * @param Auth $auth
 		 * @param bool $post_id
-		 * @param array $args
 		 */
-		public function __construct( $auth, $post_id = false, $args = array() ) {
-			parent::__construct( $auth, $post_id, $args );
+		public function __construct( $auth, $post_id = false ) {
+			parent::__construct( $auth, $post_id );
 		}
 
 		/**

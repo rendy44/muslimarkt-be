@@ -33,6 +33,13 @@ if ( ! class_exists( 'Muslimarkt\Post' ) ) {
 		public $post;
 
 		/**
+		 * Post type variable.
+		 *
+		 * @var string
+		 */
+		public $post_type = 'post';
+
+		/**
 		 * Post constructor.
 		 *
 		 * @param Auth $auth authenticator object.
@@ -63,10 +70,11 @@ if ( ! class_exists( 'Muslimarkt\Post' ) ) {
 
 				// Prepare default args.
 				$default_args = array(
-					'post_type'   => 'post',
+					'post_type'   => $this->post_type,
 					'post_title'  => $post_title,
 					'post_name'   => sanitize_title( $post_title ),
-					'post_author' => $auth->user_id
+					'post_author' => $auth->user_id,
+					'post_status' => 'publish',
 				);
 
 				// Merge args.
