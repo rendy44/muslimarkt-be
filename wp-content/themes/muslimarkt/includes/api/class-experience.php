@@ -57,11 +57,18 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 
 			// Instance a new auth.
 			$auth = new Auth( $request, true );
+
+			// Create a callback.
 			$auth->success_callback(
 				function () use ( $auth ) {
+
 					// Get user detail.
 					$user = new \Muslimarkt\Model\User( $auth->user_id );
+
+					// Get user's experiences.
 					$user->get_experiences();
+
+					// Re-validate.
 					$auth->content_on_success( $user->items );
 				},
 				false

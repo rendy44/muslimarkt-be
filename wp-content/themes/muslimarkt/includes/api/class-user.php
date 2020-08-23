@@ -64,10 +64,15 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 
 			// Instance a new auth.
 			$auth = new Auth( $request, true );
+
+			// Create callback.
 			$auth->success_callback(
 				function () use ( $auth ) {
+
 					// Get user detail.
 					$user = new \Muslimarkt\Model\User( $auth->user_id );
+
+					// Re-validate.
 					$auth->content_on_success( $user->items );
 				},
 				false
@@ -87,6 +92,8 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 
 			// Process create a user.
 			$user = new \Muslimarkt\Model\User( false, $auth->get_args() );
+
+			// Validate content.
 			$auth->content_on_error( $user->message );
 			$auth->content_on_success( __( 'Pendaftaran sukses, silahkan masuk dengan email dan kata sandi', 'muslimarkt' ) );
 			$auth->parse_api( $user );
@@ -110,6 +117,8 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 
 			// Instance a new auth.
 			$auth = new Auth( $request );
+
+			// Create a callback.
 			$auth->success_callback(
 				function () use ( $auth ) {
 
@@ -119,6 +128,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 					// Update the user.
 					$user->update( $auth->get_args() );
 
+					// Re-validate.
 					$auth->content_on_success( $user->items );
 					$auth->content_on_error( $user->message );
 					$auth->update_checked_obj( $user );
