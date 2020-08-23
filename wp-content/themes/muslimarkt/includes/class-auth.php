@@ -189,14 +189,25 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		}
 
 		/**
+		 * Update obj that will be validated.
+		 *
+		 * @param bool|Result $obj checked obj.
+		 */
+		public function update_checked_obj( $obj = false ) {
+
+			// Override object if empty.
+			$this->checked_obj = false !== $obj ? $obj : $this;
+		}
+
+		/**
 		 * Parse api result.
 		 *
 		 * @param bool|Result|mixed $obj object that will be validated.
 		 */
 		public function parse_api( $obj = false ) {
 
-			// Override object if empty.
-			$this->checked_obj = false !== $obj ? $obj : $this;
+			// Update checked obj.
+			$this->update_checked_obj( $obj );
 
 			// Validate api to decide api response.
 			if ( $this->checked_obj->is_error ) {
