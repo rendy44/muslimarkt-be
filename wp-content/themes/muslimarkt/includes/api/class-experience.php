@@ -79,25 +79,16 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 
 			// Instance a new auth.
 			$auth = new Auth( $request );
+
+			// Create a callback.
 			$auth->success_callback(
 				function () use ( $auth ) {
 
 					// Create a new experience.
 					$exp = new \Muslimarkt\Model\Experience( $auth );
-					$exp->save_details( array(
-						'position'      => 'WordPress Developer',
-						'company'       => 'PT. SoftwareSeni',
-						'month_start'   => 'Feb',
-						'year_start'    => '2019',
-						'month_end'     => '',
-						'year_end'      => '',
-						'still_working' => '1',
-						'role'          => 'Staff',
-						'industry'      => 'Konsultan IT',
-						'country'       => 'Indonesia',
-						'province'      => 'DI Yogyakarta',
-						'notes'         => 'Kosong',
-					) );
+
+					// Save experience's details.
+					$exp->save_details( $auth->get_args() );
 
 					// Re-validate.
 					$auth->content_on_error( $exp->message );
