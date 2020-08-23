@@ -64,21 +64,14 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 
 			// Instance a new auth.
 			$auth = new Auth( $request, true );
-			$auth->validate();
-
-			// Validate auth.
-			if ( $auth->is_error ) {
-
-				// Display error request.
-				wp_send_json_error( $auth->message );
-			} else {
-
+			$auth->success_callback( function () use ( $auth ) {
 				// Get user detail.
 				$user = new \Muslimarkt\Model\User( $auth->user_id );
 
 				// Display user success.
 				wp_send_json_success( $user->items );
-			}
+			} );
+			$auth->validate();
 		}
 
 		/**
@@ -116,14 +109,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 
 			// Instance a new auth.
 			$auth = new Auth( $request );
-			$auth->validate();
-
-			// Validate the auth.
-			if ( $auth->is_error ) {
-
-				// Display error request.
-				wp_send_json_error( $auth->message );
-			} else {
+			$auth->success_callback( function () use ( $auth ) {
 
 				// Instance a new user.
 				$user = new \Muslimarkt\Model\User( $auth->user_id, array(), true );
@@ -141,7 +127,33 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 					// Display success request.
 					wp_send_json_success( $user->items );
 				}
-			}
+			} );
+			$auth->validate();
+//
+//			// Validate the auth.
+//			if ( $auth->is_error ) {
+//
+//				// Display error request.
+//				wp_send_json_error( $auth->message );
+//			} else {
+//
+//				// Instance a new user.
+//				$user = new \Muslimarkt\Model\User( $auth->user_id, array(), true );
+//
+//				// Update the user.
+//				$user->update( $auth->get_args() );
+//
+//				// Validate update result.
+//				if ( $user->is_error ) {
+//
+//					// Display error request.
+//					wp_send_json_error( $user->message );
+//				} else {
+//
+//					// Display success request.
+//					wp_send_json_success( $user->items );
+//				}
+//			}
 		}
 	}
 

@@ -83,6 +83,20 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		private $error_message;
 
 		/**
+		 * Success callback variable.
+		 *
+		 * @var bool|callback
+		 */
+		private $callback = false;
+
+		/**
+		 * Force callback variable.
+		 *
+		 * @var bool
+		 */
+		private $force_callback = true;
+
+		/**
 		 * Auth constructor.
 		 *
 		 * @param WP_REST_Request $request request object.
@@ -191,9 +205,36 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 				wp_send_json_error( $this->maybe_get_api_content() );
 			} else {
 
-				// Send success json.
-				wp_send_json_success( $this->maybe_get_api_content() );
+				// Check maybe it has callback.
+				if ( false !== $this->callback ) {
+					$cb_func = $this->callback;
+
+					// Trigger callback.
+					$cb_func();
+
+					// Check maybe callback is not forced.
+					if ( ! $this->force_callback ) {
+
+						// Send success json.
+						wp_send_json_success( $this->maybe_get_api_content() );
+					}
+				} else {
+
+					// No callback, send success json.
+					wp_send_json_success( $this->maybe_get_api_content() );
+				}
 			}
+		}
+
+		/**
+		 * Save callback;
+		 *
+		 * @param callback $callback callback function.
+		 * @param bool $force_stop whether callback completely override success or not.
+		 */
+		public function success_callback( $callback, $force_stop = true ) {
+			$this->callback       = $callback;
+			$this->force_callback = $force_stop;
 		}
 
 		/**

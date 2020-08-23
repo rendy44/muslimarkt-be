@@ -60,10 +60,15 @@ if ( ! class_exists( 'Muslimarkt\Rest\Login' ) ) {
 
 			// Instance a new auth.
 			$auth = new Auth( $request );
+			$auth->success_callback(
+				function () use ( $auth ) {
 
-			// Get user detail.
-			$user = new User( $auth->user_id );
-			$auth->content_on_success( $user->items );
+					// Get user detail.
+					$user = new User( $auth->user_id );
+					$auth->content_on_success( $user->items );
+				},
+				false
+			);
 			$auth->validate();
 		}
 

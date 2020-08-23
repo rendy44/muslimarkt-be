@@ -78,6 +78,9 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 					$this->message[] = __( 'Ikun tidak valid', 'muslimarkt' );
 				} else {
 
+					// Save user data object.
+					$this->user = $user_data;
+
 					// Maybe get user details.
 					if ( ! $no_fetch ) {
 
