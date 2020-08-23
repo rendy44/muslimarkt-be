@@ -93,13 +93,9 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 
 			// Process create a user.
 			$user = new \Muslimarkt\Model\User( false, $auth->get_args() );
-
-			// Validate the process.
-			if ( $user->is_error ) {
-				wp_send_json_error( $user->message );
-			}
-
-			wp_send_json_success( __( 'Pendaftaran sukses, silahkan masuk dengan email dan kata sandi', 'muslimarkt' ) );
+			$auth->content_on_error( $user->message );
+			$auth->content_on_success( __( 'Pendaftaran sukses, silahkan masuk dengan email dan kata sandi', 'muslimarkt' ) );
+			$auth->parse_api( $user );
 		}
 
 		/**

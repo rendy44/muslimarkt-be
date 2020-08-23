@@ -62,6 +62,27 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		private $user_password;
 
 		/**
+		 * Checked object variable
+		 *
+		 * @var null|Result
+		 */
+		private $checked_obj;
+
+		/**
+		 * Success message variable.
+		 *
+		 * @var mixed
+		 */
+		private $success_message;
+
+		/**
+		 * Error message variable.
+		 *
+		 * @var mixed
+		 */
+		private $error_message;
+
+		/**
 		 * Auth constructor.
 		 *
 		 * @param WP_REST_Request $request request object.
@@ -89,6 +110,7 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		 * Validate request.
 		 */
 		public function validate() {
+
 			// Check whether key is provided or not.
 			// If yes, get user id based on that kay.
 			if ( $this->user_key ) {
@@ -148,8 +170,64 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 					}
 				}
 			}
+
+			$this->parse_api();
 		}
 
+		/**
+		 * Parse api result.
+		 *
+		 * @param bool|Result|mixed $obj object that will be validated.
+		 */
+		public function parse_api( $obj = false ) {
+
+			// Override object if empty.
+			$this->checked_obj = false !== $obj ? $obj : $this;
+
+			// Validate api to decide api response.
+			if ( $this->checked_obj->is_error ) {
+
+				// Send error json.
+				wp_send_json_error( $this->maybe_get_api_content() );
+			} else {
+
+				// Send success json.
+				wp_send_json_success( $this->maybe_get_api_content() );
+			}
+		}
+
+		/**
+		 * Get api content on success.
+		 *
+		 * @param mixed $content content on success.
+		 */
+		public function content_on_success( $content ) {
+			$this->success_message = $content;
+		}
+
+		/**
+		 * Get api content on error.
+		 *
+		 * @param mixed $content content on error.
+		 */
+		public function content_on_error( $content ) {
+			$this->error_message = $content;
+		}
+
+		/**
+		 * Maybe get api content.
+		 *
+		 * @return bool|mixed|string
+		 */
+		private function maybe_get_api_content() {
+			$default_content = $this->checked_obj->is_error ? $this->error_message : $this->success_message;
+
+			return $default_content ? $default_content : $this->message;
+		}
+
+		/**
+		 * Extract authentication args.
+		 */
 		private function extract_args() {
 
 			// Prepare default args.

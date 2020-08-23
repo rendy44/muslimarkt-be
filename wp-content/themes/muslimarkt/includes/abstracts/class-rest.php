@@ -120,19 +120,19 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 				);
 			}
 
-			// Check update method.
-			if ( $this->use_put ) {
-				$methods[] = array(
-					'methods'  => WP_REST_Server::EDITABLE,
-					'callback' => array( $this, 'put_callback' ),
-				);
-			}
-
 			// Check post method.
 			if ( $this->use_post ) {
 				$methods[] = array(
 					'methods'  => WP_REST_Server::CREATABLE,
 					'callback' => array( $this, 'post_callback' ),
+				);
+			}
+
+			// Check update method.
+			if ( $this->use_put ) {
+				$methods[] = array(
+					'methods'  => WP_REST_Server::EDITABLE,
+					'callback' => array( $this, 'put_callback' ),
 				);
 			}
 

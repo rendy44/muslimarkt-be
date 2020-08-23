@@ -60,21 +60,11 @@ if ( ! class_exists( 'Muslimarkt\Rest\Login' ) ) {
 
 			// Instance a new auth.
 			$auth = new Auth( $request );
+
+			// Get user detail.
+			$user = new User( $auth->user_id );
+			$auth->content_on_success( $user->items );
 			$auth->validate();
-
-			// Validate the process.
-			if ( $auth->is_error ) {
-
-				// Display error json.
-				wp_send_json_error( $auth->message );
-			} else {
-
-				// Get user detail.
-				$user = new User( $auth->user_id );
-
-				// Display success json.
-				wp_send_json_success( $user->items );
-			}
 		}
 
 		/**

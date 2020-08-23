@@ -71,24 +71,30 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 			if ( $user_id ) {
 
 				// Save user object.
-				$this->user = get_userdata( $user_id );
+				$user_data = get_userdata( $user_id );
 
-				// Maybe get user details.
-				if ( ! $no_fetch ) {
+				// Validate the user.
+				if ( ! $user_data ) {
+					$this->message[] = __( 'Ikun tidak valid', 'muslimarkt' );
+				} else {
 
-					// Generate user details.
-					$this->generate_user_details();
+					// Maybe get user details.
+					if ( ! $no_fetch ) {
+
+						// Generate user details.
+						$this->generate_user_details();
+					}
+
+					// Get more user details.
+					$this->items['first_name']   = $this->user->first_name;
+					$this->items['last_name']    = $this->user->last_name;
+					$this->items['display_name'] = $this->user->display_name;
+					$this->items['email']        = $this->user->user_email;
+					$this->items['avatar_url']   = get_avatar_url( $user_id );
+
+					// Update result.
+					$this->is_error = false;
 				}
-
-				// Get more user details.
-				$this->items['first_name']   = $this->user->first_name;
-				$this->items['last_name']    = $this->user->last_name;
-				$this->items['display_name'] = $this->user->display_name;
-				$this->items['email']        = $this->user->user_email;
-				$this->items['avatar_url']   = get_avatar_url( $user_id );
-
-				// Update result.
-				$this->is_error = false;
 
 			} else {
 
@@ -264,6 +270,16 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 				// Override details.
 				$this->items = $details;
 			}
+		}
+
+		public function get_experiences() {
+			$experiences = new Post(
+				array(
+					'post_type'   => 'experience',
+					'post_author' => $this->user->ID
+				) );
+			$query       = $experiences->get_query();
+			$this->items = $query->get_posts();
 		}
 	}
 }

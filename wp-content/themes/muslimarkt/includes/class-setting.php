@@ -67,7 +67,7 @@ if ( ! class_exists( 'Muslimarkt\Setting' ) ) {
 		 */
 		public function rest_filter_incoming_connections( $errors ) {
 			$origin = get_http_origin();
-			if ( $origin !== $this->allowed_origin ) {
+			if ( $origin && $origin !== $this->allowed_origin ) {
 				return new WP_Error( 'forbidden_access', $origin, array(
 					'status' => 403
 				) );
