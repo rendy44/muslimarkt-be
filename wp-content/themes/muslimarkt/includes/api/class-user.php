@@ -64,13 +64,14 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 
 			// Instance a new auth.
 			$auth = new Auth( $request, true );
-			$auth->success_callback( function () use ( $auth ) {
-				// Get user detail.
-				$user = new \Muslimarkt\Model\User( $auth->user_id );
-
-				// Display user success.
-				wp_send_json_success( $user->items );
-			} );
+			$auth->success_callback(
+				function () use ( $auth ) {
+					// Get user detail.
+					$user = new \Muslimarkt\Model\User( $auth->user_id );
+					$auth->content_on_success( $user->items );
+				},
+				false
+			);
 			$auth->validate();
 		}
 
