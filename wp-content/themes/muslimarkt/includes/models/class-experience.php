@@ -9,7 +9,6 @@
 
 namespace Muslimarkt\Model;
 
-use Muslimarkt\Auth;
 use Muslimarkt\Post;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -55,11 +54,28 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 		/**
 		 * Experience constructor.
 		 *
-		 * @param Auth $auth
-		 * @param bool $post_id
+		 * @param int $user_id id of the user.
+		 * @param bool|int $post_id id of the post.
 		 */
-		public function __construct( $auth, $post_id = false ) {
-			parent::__construct( $auth, $post_id );
+		public function __construct( $user_id, $post_id = false ) {
+			parent::__construct( $user_id, $post_id );
+		}
+
+		public function get_details() {
+
+			// Get experience base detail.
+			$this->get_base_details();
+
+			// Get additional details.
+			$details = $this->get_metas( $this->used_fields );
+
+			// Merge details.
+			$this->items = array_merge( $this->items, $details );
+		}
+
+		private function get_base_details() {
+			$this->items['id']   = $this->post->ID;
+			$this->items['slug'] = $this->post->post_name;
 		}
 
 		/**

@@ -42,11 +42,11 @@ if ( ! class_exists( 'Muslimarkt\Post' ) ) {
 		/**
 		 * Post constructor.
 		 *
-		 * @param Auth $auth authenticator object.
-		 * @param bool $post_id id of the post.
+		 * @param int $user_id id of the user.
+		 * @param bool|int $post_id id of the post.
 		 * @param array $args args to create post.
 		 */
-		public function __construct( $auth, $post_id = false, $args = array() ) {
+		public function __construct( $user_id, $post_id = false, $args = array() ) {
 
 			// Check whether post id is defined or not.
 			if ( $post_id ) {
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Muslimarkt\Post' ) ) {
 				$this->post = get_post( $post_id );
 
 				// Validate the post author.
-				if ( $auth->user_id === $this->post->post_author ) {
+				if ( $user_id === $this->post->post_author ) {
 
 					// Update the result.
 					$this->is_error = false;
@@ -73,7 +73,7 @@ if ( ! class_exists( 'Muslimarkt\Post' ) ) {
 					'post_type'   => $this->post_type,
 					'post_title'  => $post_title,
 					'post_name'   => sanitize_title( $post_title ),
-					'post_author' => $auth->user_id,
+					'post_author' => $user_id,
 					'post_status' => 'publish',
 				);
 

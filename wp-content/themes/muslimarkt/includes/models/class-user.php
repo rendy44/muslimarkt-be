@@ -275,14 +275,36 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 			}
 		}
 
+		/**
+		 * Get user experiences.
+		 */
 		public function get_experiences() {
 			$experiences = new Post(
 				array(
 					'post_type'   => 'experience',
 					'post_author' => $this->user->ID
 				) );
-			$query       = $experiences->get_query();
-			$this->items = $query->get_posts();
+
+			// Build the query.
+			$query = $experiences->get_query();
+
+			// Reset object.
+			$this->items = array();
+
+			// Loop the query.
+			while ( $query->have_posts() ) {
+				$query->the_post();
+
+				// Instance a new experience.
+				$experience = new Experience( $this->user->ID, get_the_ID() );
+
+				// Load experience details.
+				$experience->get_details();
+
+				// Store experience details.
+				$this->items[] = $experience->items;
+			}
+			wp_reset_postdata();
 		}
 	}
 }
