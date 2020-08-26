@@ -43,24 +43,44 @@ if ( ! class_exists( 'Muslimarkt\Post' ) ) {
 		 * Post constructor.
 		 *
 		 * @param int $user_id id of the user.
-		 * @param bool|int $post_id id of the post.
+		 * @param bool|string|int|WP_Post $post_tag object of WP_Post, id of the post or slug of the post.
 		 * @param array $args args to create post.
 		 */
-		public function __construct( $user_id, $post_id = false, $args = array() ) {
+		public function __construct( $user_id, $post_tag = false, $args = array() ) {
 
-			// Check whether post id is defined or not.
-			if ( $post_id ) {
+			// Check whether post is defined or not.
+			if ( $post_tag ) {
 
-				// Get post object.
-				$this->post = get_post( $post_id );
+				// Maybe it's already post object.
+				if ( $post_tag instanceof WP_Post ) {
 
-				// Validate the post author.
-				if ( $user_id === $this->post->post_author ) {
+					// Directly save tag as post object.
+					$this->post = $post_tag;
 
-					// Update the result.
-					$this->is_error = false;
+				} elseif ( is_int( $post_tag ) ) {
+
+					// Get post based on id.
+					$this->post = get_post( $post_tag );
+
+				} elseif ( is_string( $post_tag ) ) {
+
+					// Get post based on slug.
+					$this->post = get_page_by_path( $post_tag, OBJECT, $this->post_type );
 				} else {
-					$this->message[] = __( 'Anda tidak memiliki hak untuk mengakses', 'muslimarkt' );
+					$this->message[] = __( 'Terjadi kesalahan', 'muslimarkt' );
+				}
+
+				// Make sure, we haven't encountered any errors yet.
+				if ( ! empty( $this->message ) ) {
+
+					// Validate the post author.
+					if ( $user_id === $this->post->post_author ) {
+
+						// Update the result.
+						$this->is_error = false;
+					} else {
+						$this->message[] = __( 'Anda tidak memiliki hak untuk mengakses', 'muslimarkt' );
+					}
 				}
 			} else {
 
