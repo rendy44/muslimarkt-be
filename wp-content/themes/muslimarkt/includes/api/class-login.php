@@ -29,6 +29,13 @@ if ( ! class_exists( 'Muslimarkt\Rest\Login' ) ) {
 		use Singleton;
 
 		/**
+		 * Override privilege variable.
+		 *
+		 * @var bool
+		 */
+		protected $is_require_key = false;
+
+		/**
 		 * Override endpoint url variable.
 		 *
 		 * @var string
