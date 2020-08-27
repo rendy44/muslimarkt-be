@@ -54,11 +54,12 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 		/**
 		 * Experience constructor.
 		 *
-		 * @param int $user_id id of the user.
-		 * @param bool|int $post_id id of the post.
+		 * @param $user_id
+		 * @param bool $post_tag
+		 * @param array $args
 		 */
-		public function __construct( $user_id, $post_id = false ) {
-			parent::__construct( $user_id, $post_id );
+		public function __construct( $user_id, $post_tag = false, $args = array() ) {
+			parent::__construct( $user_id, $post_tag, $args );
 		}
 
 		public function get_details() {
