@@ -42,6 +42,13 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 		protected $use_get = true;
 
 		/**
+		 * Override get with detail variable.
+		 *
+		 * @var bool
+		 */
+		protected $get_with_detail = true;
+
+		/**
 		 * Override use post variable.
 		 *
 		 * @var bool
@@ -74,7 +81,34 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 				false
 			);
 			$auth->validate();
+		}
 
+		/**
+		 * Callback for getting detail method.
+		 *
+		 * @param WP_REST_Request $request request object.
+		 */
+		function get_detail_callback( $request ) {
+
+			// Instance a new auth.
+			$auth = new Auth( $request, true );
+
+			// Create a callback.
+			$auth->success_callback(
+				function () use ( $auth ) {
+
+					// Get experience detail.
+					$experience = new \Muslimarkt\Model\Experience( $auth->user_id, $auth->get_detail_slug() );
+
+					// Get experience details.
+					$experience->get_details();
+
+					// Re-validate.
+					$auth->content_on_success( $experience->items );
+				},
+				false
+			);
+			$auth->validate();
 		}
 
 		/**

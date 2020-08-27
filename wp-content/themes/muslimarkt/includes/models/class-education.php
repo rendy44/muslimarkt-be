@@ -1,6 +1,6 @@
 <?php
 /**
- * Class experience.
+ * Class education.
  *
  * @author Rendy
  * @package Muslimarkt
@@ -15,17 +15,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
+if ( ! class_exists( 'Muslimarkt\Model\Education' ) ) {
 
 	/**
-	 * Class Experience
+	 * Class Education
 	 *
 	 * @package Muslimarkt
 	 */
-	final class Experience extends Post {
+	final class Education extends Post {
 
 		/**
-		 * Experience allowed meta.
+		 * Education allowed meta.
 		 *
 		 * @var array
 		 */
@@ -49,25 +49,21 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 		 *
 		 * @var string
 		 */
-		public $post_type = 'experience';
+		public $post_type = 'education';
 
 		/**
-		 * Experience constructor.
+		 * Education constructor.
 		 *
-		 * @param $user_id
-		 * @param bool $post_tag
-		 * @param array $args
+		 * @param int $user_id id of the user.
+		 * @param bool|int $post_id id of the post.
 		 */
-		public function __construct( $user_id, $post_tag = false, $args = array() ) {
-			parent::__construct( $user_id, $post_tag, $args );
+		public function __construct( $user_id, $post_id = false ) {
+			parent::__construct( $user_id, $post_id );
 		}
 
-		/**
-		 * Get experience details.
-		 */
 		public function get_details() {
 
-			// Get experience base detail.
+			// Get education base detail.
 			$this->get_base_details();
 
 			// Get additional details.
@@ -83,7 +79,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 		}
 
 		/**
-		 * Save experience detail.
+		 * Save education detail.
 		 *
 		 * @param array $args associate key=>value detail.
 		 */

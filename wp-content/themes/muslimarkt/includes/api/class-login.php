@@ -100,6 +100,15 @@ if ( ! class_exists( 'Muslimarkt\Rest\Login' ) ) {
 		function put_callback( $request ) {
 			// TODO: Implement put_callback() method.
 		}
+
+		/**
+		 * Callback for getting detail method.
+		 *
+		 * @param WP_REST_Request $request request object.
+		 */
+		function get_detail_callback( $request ) {
+			// TODO: Implement get_detail_callback() method.
+		}
 	}
 
 	Login::init();

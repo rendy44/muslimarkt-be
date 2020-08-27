@@ -120,6 +120,15 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 			);
 			$auth->validate();
 		}
+
+		/**
+		 * Callback for getting detail method.
+		 *
+		 * @param WP_REST_Request $request request object.
+		 */
+		function get_detail_callback( $request ) {
+			// TODO: Implement get_detail_callback() method.
+		}
 	}
 
 	User::init();

@@ -41,6 +41,13 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		private $array_args = array();
 
 		/**
+		 * Detail slug variable.
+		 *
+		 * @var string
+		 */
+		private $detail_slug = '';
+
+		/**
 		 * User key variable.
 		 *
 		 * @var string
@@ -118,6 +125,15 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		 */
 		public function get_args() {
 			return $this->array_args;
+		}
+
+		/**
+		 * Get detail slug arg from the request.
+		 *
+		 * @return string
+		 */
+		public function get_detail_slug() {
+			return $this->detail_slug;
 		}
 
 		/**
@@ -293,6 +309,7 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 			$this->array_args = wp_parse_args( $this->array_args, $default_args );
 
 			// Save individual args.
+			$this->detail_slug   = $this->array_args['slug'];
 			$this->user_key      = $this->array_args['key'];
 			$this->user_email    = $this->array_args['email'];
 			$this->user_password = $this->array_args['password'];
