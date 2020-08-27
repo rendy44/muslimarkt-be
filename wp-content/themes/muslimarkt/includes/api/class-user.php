@@ -35,13 +35,6 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 		protected $endpoint = 'user';
 
 		/**
-		 * Override use post variable.
-		 *
-		 * @var bool
-		 */
-		protected $use_post = true;
-
-		/**
 		 * Override use put variable.
 		 *
 		 * @var bool
@@ -86,17 +79,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 		 * @param WP_REST_Request $request request object.
 		 */
 		function post_callback( $request ) {
-
-			// Instance new auth.
-			$auth = new Auth( $request );
-
-			// Process create a user.
-			$user = new \Muslimarkt\Model\User( false, $auth->get_args() );
-
-			// Validate content.
-			$auth->content_on_error( $user->message );
-			$auth->content_on_success( __( 'Pendaftaran sukses, silahkan masuk dengan email dan kata sandi', 'muslimarkt' ) );
-			$auth->parse_api( $user );
+			// TODO: Implement post_callback() method.
 		}
 
 		/**
