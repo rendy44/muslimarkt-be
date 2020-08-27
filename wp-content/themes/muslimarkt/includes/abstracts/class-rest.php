@@ -33,6 +33,13 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 		private $namespace = 'muslimarkt';
 
 		/**
+		 * Variable to determine whether api route should use api or not.
+		 *
+		 * @var bool
+		 */
+		protected $is_require_key = true;
+
+		/**
 		 * Endpoint variable.
 		 *
 		 * @var string
@@ -151,7 +158,12 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 		 * Do register API.
 		 */
 		public function register_api() {
-			register_rest_route( $this->namespace, '/' . $this->endpoint . '/(?P<key>[\S]+)', $this->get_methods_collection() );
+
+			// Build endpoint url.
+			$endpoint = $this->is_require_key ? $this->endpoint . '/(?P<key>[\S]+)' : $this->endpoint;
+
+			// Register route.
+			register_rest_route( $this->namespace, '/' . $endpoint, $this->get_methods_collection() );
 		}
 	}
 }
