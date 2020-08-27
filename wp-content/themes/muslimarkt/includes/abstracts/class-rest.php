@@ -173,24 +173,30 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 		 */
 		public function register_api() {
 
-			// Register route.
-			register_rest_route( $this->namespace, '/' . $this->get_base_endpoint(), $this->get_methods_collection() );
-
 			// Check maybe add custom endpoint for getting detail.
 			if ( $this->use_get && $this->get_with_detail ) {
 
 				// Register custom endpoint.
 				$this->custom_get_with_detail_api();
 			}
+
+			// Register route.
+			register_rest_route( $this->namespace, '/' . $this->get_base_endpoint(), $this->get_methods_collection() );
 		}
 
 		/**
 		 * Get base route endpoint, include whether use key or not.
 		 *
+		 * @param string|bool $prepend add prepend path.
+		 *
 		 * @return string
 		 */
-		private function get_base_endpoint() {
-			return $this->is_require_key ? $this->endpoint . '/(?P<key>[\S]+)' : $this->endpoint;
+		private function get_base_endpoint( $prepend = false ) {
+
+			// Prepare base variable.
+			$base_endpoint = $prepend ? $this->endpoint . $prepend : $this->endpoint;
+
+			return $this->is_require_key ? $base_endpoint . '/(?P<key>[\S]+)' : $base_endpoint;
 		}
 
 		/**
@@ -199,7 +205,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 		private function custom_get_with_detail_api() {
 
 			// Register custom route for getting detail.
-			register_rest_route( $this->namespace, '/' . $this->get_base_endpoint() . '/(?P<slug>[\S]+)', array(
+			register_rest_route( $this->namespace, '/' . $this->get_base_endpoint( '/(?P<slug>[\S]+)' ), array(
 				array(
 					'methods'  => WP_REST_Server::READABLE,
 					'callback' => array( $this, 'get_detail_callback' ),
