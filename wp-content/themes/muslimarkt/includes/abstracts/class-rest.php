@@ -151,7 +151,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 		 * Do register API.
 		 */
 		public function register_api() {
-			register_rest_route( $this->namespace, '/' . $this->endpoint, $this->get_methods_collection() );
+			register_rest_route( $this->namespace, '/' . $this->endpoint . '/(?P<key>[\S]+)', $this->get_methods_collection() );
 		}
 	}
 }
