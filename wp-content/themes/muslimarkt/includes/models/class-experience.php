@@ -39,7 +39,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 			'still_working',
 			'role',
 			'industry',
-			'country',
+			'luar_negeri',
 			'province',
 			'notes',
 		);
