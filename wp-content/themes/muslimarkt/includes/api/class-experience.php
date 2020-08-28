@@ -98,13 +98,16 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 				function () use ( $auth ) {
 
 					// Get experience detail.
-					$experience = new \Muslimarkt\Model\Experience( $auth->user_id, $auth->get_detail_slug() );
+					$exp = new \Muslimarkt\Model\Experience( $auth->user_id, $auth->get_detail_slug() );
 
 					// Get experience details.
-					$experience->get_details();
+					$exp->get_details();
 
 					// Re-validate.
-					$auth->content_on_success( $experience->items );
+					$auth->content_on_error( $exp->message );
+					$auth->content_on_success( $exp->items );
+					$auth->update_checked_error( $exp->is_error );
+					$auth->parse_api( $exp, false );
 				},
 				false
 			);
@@ -134,7 +137,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 					// Re-validate.
 					$auth->content_on_error( $exp->message );
 					$auth->content_on_success( $exp->post->post_name );
-					$auth->update_checked_obj( $exp );
+					$auth->update_checked_error( $exp->is_error );
 				},
 				false
 			);

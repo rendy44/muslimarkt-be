@@ -60,12 +60,36 @@ if ( ! class_exists( 'Muslimarkt\Post' ) ) {
 				} elseif ( is_int( $post_tag ) ) {
 
 					// Get post based on id.
-					$this->post = get_post( $post_tag );
+					$find_post = get_post( $post_tag );
+
+					// Validate found post.
+					if ( $find_post ) {
+
+						// Save found post.
+						$this->post     = $find_post;
+						$this->is_error = false;
+					} else {
+
+						// Add message.
+						$this->message[] = __( 'Pos id tidak ditemukan', 'muslimarkt' );
+					}
 
 				} elseif ( is_string( $post_tag ) ) {
 
 					// Get post based on slug.
-					$this->post = get_page_by_path( $post_tag, OBJECT, $this->post_type );
+					$find_post = get_page_by_path( $post_tag, OBJECT, $this->post_type );
+
+					// Validate found post.
+					if ( $find_post ) {
+
+						// Save found post.
+						$this->post     = $find_post;
+						$this->is_error = false;
+					} else {
+
+						// Add message.
+						$this->message[] = __( 'Pos alias tidak ditemukan', 'muslimarkt' );
+					}
 				} else {
 					$this->message[] = __( 'Terjadi kesalahan', 'muslimarkt' );
 				}
@@ -79,7 +103,7 @@ if ( ! class_exists( 'Muslimarkt\Post' ) ) {
 						// Update the result.
 						$this->is_error = false;
 					} else {
-						$this->message[] = __( 'Anda tidak memiliki hak untuk mengakses', 'muslimarkt' );
+						$this->message[] = __( 'Anda tidak memiliki hak untuk mengakses pos ini', 'muslimarkt' );
 					}
 				}
 			} else {

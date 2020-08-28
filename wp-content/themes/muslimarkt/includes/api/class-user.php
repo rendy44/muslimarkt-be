@@ -114,7 +114,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 					// Re-validate.
 					$auth->content_on_success( $user->items );
 					$auth->content_on_error( $user->message );
-					$auth->update_checked_obj( $user );
+					$auth->update_checked_error( $user->is_error );
 				},
 				false
 			);

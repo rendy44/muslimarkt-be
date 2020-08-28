@@ -69,11 +69,11 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		private $user_password;
 
 		/**
-		 * Checked object variable
+		 * Checked error variable
 		 *
 		 * @var null|Result
 		 */
-		private $checked_obj;
+		private $checked_error = true;
 
 		/**
 		 * Success message variable.
@@ -201,32 +201,34 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 				}
 			}
 
+			// Parse api.
 			$this->parse_api();
 		}
 
 		/**
 		 * Update obj that will be validated.
 		 *
-		 * @param bool|Result $obj checked obj.
+		 * @param bool $is_error checked error variable.
 		 */
-		public function update_checked_obj( $obj = false ) {
+		public function update_checked_error( $is_error ) {
 
 			// Override object if empty.
-			$this->checked_obj = false !== $obj ? $obj : $this;
+			$this->checked_error = $is_error;
 		}
 
 		/**
 		 * Parse api result.
 		 *
 		 * @param bool|Result|mixed $obj object that will be validated.
+		 * @param bool $with_callback whether trigger callback or not.
 		 */
-		public function parse_api( $obj = false ) {
+		public function parse_api( $obj = false, $with_callback = true ) {
 
 			// Update checked obj.
-			$this->update_checked_obj( $obj );
+			$this->update_checked_error( false !== $obj ? $obj->is_error : $this->is_error );
 
 			// Validate api to decide api response.
-			if ( $this->checked_obj->is_error ) {
+			if ( $this->checked_error ) {
 
 				// Send error json.
 				wp_send_json_error( $this->maybe_get_api_content() );
@@ -236,14 +238,26 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 				if ( false !== $this->callback ) {
 					$cb_func = $this->callback;
 
-					// Trigger callback.
-					$cb_func();
+					// Only trigger callback when it is necessary.
+					if ( $with_callback ) {
+
+						// Trigger callback.
+						$cb_func();
+					}
 
 					// Check maybe callback is not forced.
 					if ( ! $this->force_callback ) {
 
-						// Send success json.
-						wp_send_json_success( $this->maybe_get_api_content() );
+						// Re-validate result.
+						if ( $this->checked_error ) {
+
+							// Send error json.
+							wp_send_json_error( $this->maybe_get_api_content() );
+						} else {
+
+							// Send success json.
+							wp_send_json_success( $this->maybe_get_api_content() );
+						}
 					}
 				} else {
 
@@ -288,7 +302,7 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		 * @return bool|mixed|string
 		 */
 		private function maybe_get_api_content() {
-			$default_content = $this->checked_obj->is_error ? $this->error_message : $this->success_message;
+			$default_content = $this->checked_error ? $this->error_message : $this->success_message;
 
 			return $default_content ? $default_content : $this->message;
 		}
@@ -335,6 +349,11 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 
 			// Convert user key into email.
 			$maybe_email = helper::encrypt( $this->user_key, true );
+
+			// Validate email.
+			if ( ! $maybe_email ) {
+				return false;
+			}
 
 			// Find user by its email.
 			return $this->get_user_by_email( $maybe_email );

@@ -42,5 +42,7 @@ if ( ! trait_exists( 'Muslimarkt\Result' ) ) {
 		 * @var array
 		 */
 		public $items = array();
+
+		public $log = array();
 	}
 }

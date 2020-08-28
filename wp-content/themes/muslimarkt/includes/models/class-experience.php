@@ -77,6 +77,9 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 			$this->items = array_merge( $this->items, $details );
 		}
 
+		/**
+		 * Get post base details.
+		 */
 		private function get_base_details() {
 			$this->items['id']   = $this->post->ID;
 			$this->items['slug'] = $this->post->post_name;
