@@ -141,14 +141,6 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 				);
 			}
 
-			// Check update method.
-			if ( $this->use_put ) {
-				$methods[] = array(
-					'methods'  => WP_REST_Server::EDITABLE,
-					'callback' => array( $this, 'put_callback' ),
-				);
-			}
-
 			// Check get method.
 			if ( $this->use_get ) {
 				$methods[] = array(
@@ -167,6 +159,14 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 		 */
 		private function get_custom_methods_collection() {
 			$methods = array();
+
+			// Check put method.
+			if ( $this->use_put ) {
+				$methods[] = array(
+					'methods'  => WP_REST_Server::EDITABLE,
+					'callback' => array( $this, 'put_callback' ),
+				);
+			}
 
 			// Check delete method.
 			if ( $this->use_delete ) {
@@ -193,7 +193,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 		public function register_api() {
 
 			// Check maybe add custom endpoint.
-			if ( ( $this->use_get && $this->get_with_detail ) || $this->use_delete ) {
+			if ( ( $this->use_get && $this->get_with_detail ) || $this->use_delete || $this->use_put ) {
 
 				// Register custom endpoint.
 				$this->custom_path_with_slug();

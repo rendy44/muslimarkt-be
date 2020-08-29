@@ -63,6 +63,13 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 		protected $use_delete = true;
 
 		/**
+		 * Override use put variable.
+		 *
+		 * @var bool
+		 */
+		protected $use_put = true;
+
+		/**
 		 * Callback for get method.
 		 *
 		 * @param WP_REST_Request $request request object.
@@ -190,7 +197,31 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 		 * @param WP_REST_Request $request request object.
 		 */
 		function put_callback( $request ) {
-			// TODO: Implement put_callback() method.
+
+			// Instance a new auth.
+			$auth = new Auth( $request );
+
+			// Create a callback.
+			$auth->success_callback(
+				function () use ( $auth ) {
+
+					// Get existing experience.
+					$exp = new \Muslimarkt\Model\Experience( $auth->user_id, $auth->get_detail_slug() );
+
+					// Save experience's details.
+					$exp->save_details( $auth->get_args() );
+
+					// Re-validate.
+					$auth->content_on_error( $exp->message );
+					$auth->content_on_success( __( 'Berhasil diperbarui', 'muslimarkt' ) );
+					$auth->update_checked_error( $exp->is_error );
+					$auth->parse_api( $exp, false );
+				},
+				false
+			);
+
+			// Validate the request.
+			$auth->validate();
 		}
 	}
 

@@ -112,7 +112,8 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		public function __construct( $request, $use_param = false ) {
 
 			// Get user key.
-			$this->user_key = $request->get_param( 'key' );
+			$this->user_key    = $request->get_param( 'key' );
+			$this->detail_slug = $request->get_param( 'slug' );
 
 			// Get decoded params.
 			$this->array_args = $use_param ? $request->get_params() : json_decode( $request->get_body(), true );
@@ -325,7 +326,6 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 			$this->array_args = wp_parse_args( $this->array_args, $default_args );
 
 			// Save individual args.
-			$this->detail_slug   = $this->array_args['slug'];
 			$this->user_email    = $this->array_args['email'];
 			$this->user_password = $this->array_args['password'];
 		}
