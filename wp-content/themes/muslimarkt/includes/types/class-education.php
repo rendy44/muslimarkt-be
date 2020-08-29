@@ -1,6 +1,6 @@
 <?php
 /**
- * Experience post type class.
+ * Education post type class.
  *
  * @author Rendy
  * @package Muslimarkt
@@ -14,14 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Muslimarkt\Type\Experience' ) ) {
+if ( ! class_exists( 'Muslimarkt\Type\Education' ) ) {
 
 	/**
-	 * Class Experience
+	 * Class Education
 	 *
 	 * @package Muslimarkt\Type
 	 */
-	final class Experience extends Type {
+	final class Education extends Type {
 		use Singleton;
 
 		/**
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Muslimarkt\Type\Experience' ) ) {
 		 *
 		 * @var string
 		 */
-		protected $slug = 'experience';
+		protected $slug = 'education';
 
 		/**
 		 * Override post type args.
@@ -37,10 +37,10 @@ if ( ! class_exists( 'Muslimarkt\Type\Experience' ) ) {
 		 * @var array
 		 */
 		protected $args = array(
-			'label'     => 'Experiences',
-			'menu_icon' => 'dashicons-nametag',
+			'label'     => 'Educations',
+			'menu_icon' => 'dashicons-welcome-learn-more',
 		);
 	}
 
-	Experience::init();
+	Education::init();
 }
