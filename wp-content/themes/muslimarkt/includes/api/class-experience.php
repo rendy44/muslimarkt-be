@@ -56,6 +56,13 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 		protected $use_post = true;
 
 		/**
+		 * Override use delete variable.
+		 *
+		 * @var bool
+		 */
+		protected $use_delete = true;
+
+		/**
 		 * Callback for get method.
 		 *
 		 * @param WP_REST_Request $request request object.
@@ -152,7 +159,29 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 		 * @param WP_REST_Request $request request object.
 		 */
 		function delete_callback( $request ) {
-			// TODO: Implement delete_callback() method.
+
+			// Instance a new auth.
+			$auth = new Auth( $request, true );
+
+			// Create a callback.
+			$auth->success_callback(
+				function () use ( $auth ) {
+
+					// Get experience detail.
+					$exp = new \Muslimarkt\Model\Experience( $auth->user_id, $auth->get_detail_slug() );
+
+					// Delete experience.
+					$exp->delete();
+
+					// Re-validate.
+					$auth->content_on_error( $exp->message );
+					$auth->content_on_success( __( 'Berhasil dihapus', 'muslimarkt' ) );
+					$auth->update_checked_error( $exp->is_error );
+					$auth->parse_api( $exp, false );
+				},
+				false
+			);
+			$auth->validate();
 		}
 
 		/**

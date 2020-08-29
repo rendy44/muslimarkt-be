@@ -133,14 +133,6 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 		private function get_methods_collection() {
 			$methods = array();
 
-			// Check delete method.
-			if ( $this->use_delete ) {
-				$methods[] = array(
-					'methods'  => WP_REST_Server::DELETABLE,
-					'callback' => array( $this, 'delete_callback' ),
-				);
-			}
-
 			// Check post method.
 			if ( $this->use_post ) {
 				$methods[] = array(
@@ -169,19 +161,53 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 		}
 
 		/**
+		 * Get custom callback collections.
+		 *
+		 * @return array
+		 */
+		private function get_custom_methods_collection() {
+			$methods = array();
+
+			// Check delete method.
+			if ( $this->use_delete ) {
+				$methods[] = array(
+					'methods'  => WP_REST_Server::DELETABLE,
+					'callback' => array( $this, 'delete_callback' ),
+				);
+			}
+
+			// Check get detail method.
+			if ( $this->use_get && $this->get_with_detail ) {
+				$methods[] = array(
+					'methods'  => WP_REST_Server::READABLE,
+					'callback' => array( $this, 'get_detail_callback' ),
+				);
+			}
+
+			return $methods;
+		}
+
+		/**
 		 * Do register API.
 		 */
 		public function register_api() {
 
-			// Check maybe add custom endpoint for getting detail.
-			if ( $this->use_get && $this->get_with_detail ) {
+			// Check maybe add custom endpoint.
+			if ( ( $this->use_get && $this->get_with_detail ) || $this->use_delete ) {
 
 				// Register custom endpoint.
-				$this->custom_get_with_detail_api();
+				$this->custom_path_with_slug();
 			}
 
 			// Register route.
 			register_rest_route( $this->namespace, '/' . $this->get_base_endpoint(), $this->get_methods_collection() );
+		}
+
+		/**
+		 * Register custom endpoint with slug.
+		 */
+		private function custom_path_with_slug() {
+			register_rest_route( $this->namespace, '/' . $this->get_base_endpoint( '/(?P<slug>[\S]+)' ), $this->get_custom_methods_collection() );
 		}
 
 		/**
@@ -197,20 +223,6 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 			$base_endpoint = $prepend ? $this->endpoint . $prepend : $this->endpoint;
 
 			return $this->is_require_key ? $base_endpoint . '/(?P<key>[\S]+)' : $base_endpoint;
-		}
-
-		/**
-		 * Create custom endpoint route for getting detail.
-		 */
-		private function custom_get_with_detail_api() {
-
-			// Register custom route for getting detail.
-			register_rest_route( $this->namespace, '/' . $this->get_base_endpoint( '/(?P<slug>[\S]+)' ), array(
-				array(
-					'methods'  => WP_REST_Server::READABLE,
-					'callback' => array( $this, 'get_detail_callback' ),
-				)
-			) );
 		}
 	}
 }
