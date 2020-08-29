@@ -46,7 +46,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 		 *
 		 * @var bool
 		 */
-		protected $get_with_detail = true;
+		protected $use_detail = true;
 
 		/**
 		 * Override use post variable.

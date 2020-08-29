@@ -61,11 +61,11 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 		protected $use_get = false;
 
 		/**
-		 * get with detail variable.
+		 * Variable use detail.
 		 *
 		 * @var bool
 		 */
-		protected $get_with_detail = false;
+		protected $use_detail = false;
 
 		/**
 		 * Variable use put.
@@ -149,6 +149,14 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 				);
 			}
 
+			// Check put method.
+			if ( $this->use_put && ! $this->use_detail ) {
+				$methods[] = array(
+					'methods'  => WP_REST_Server::EDITABLE,
+					'callback' => array( $this, 'put_callback' ),
+				);
+			}
+
 			return $methods;
 		}
 
@@ -161,7 +169,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 			$methods = array();
 
 			// Check put method.
-			if ( $this->use_put ) {
+			if ( $this->use_put && $this->use_detail ) {
 				$methods[] = array(
 					'methods'  => WP_REST_Server::EDITABLE,
 					'callback' => array( $this, 'put_callback' ),
@@ -169,7 +177,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 			}
 
 			// Check delete method.
-			if ( $this->use_delete ) {
+			if ( $this->use_delete && $this->use_detail ) {
 				$methods[] = array(
 					'methods'  => WP_REST_Server::DELETABLE,
 					'callback' => array( $this, 'delete_callback' ),
@@ -177,7 +185,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 			}
 
 			// Check get detail method.
-			if ( $this->use_get && $this->get_with_detail ) {
+			if ( $this->use_get && $this->use_detail ) {
 				$methods[] = array(
 					'methods'  => WP_REST_Server::READABLE,
 					'callback' => array( $this, 'get_detail_callback' ),
@@ -193,7 +201,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
 		public function register_api() {
 
 			// Check maybe add custom endpoint.
-			if ( ( $this->use_get && $this->get_with_detail ) || $this->use_delete || $this->use_put ) {
+			if ( ( $this->use_get && $this->use_detail ) || $this->use_delete || $this->use_put ) {
 
 				// Register custom endpoint.
 				$this->custom_path_with_slug();
