@@ -37,8 +37,9 @@ if ( ! class_exists( 'Muslimarkt\Type\Education' ) ) {
 		 * @var array
 		 */
 		protected $args = array(
-			'label'     => 'Educations',
-			'menu_icon' => 'dashicons-welcome-learn-more',
+			'label'              => 'Educations',
+			'menu_icon'          => 'dashicons-welcome-learn-more',
+			'publicly_queryable' => false,
 		);
 	}
 

@@ -37,8 +37,9 @@ if ( ! class_exists( 'Muslimarkt\Type\Experience' ) ) {
 		 * @var array
 		 */
 		protected $args = array(
-			'label'     => 'Experiences',
-			'menu_icon' => 'dashicons-nametag',
+			'label'              => 'Experiences',
+			'menu_icon'          => 'dashicons-nametag',
+			'publicly_queryable' => false,
 		);
 	}
 
