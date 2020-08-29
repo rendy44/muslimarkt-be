@@ -10,6 +10,7 @@
 namespace Muslimarkt\Model;
 
 use Muslimarkt\Post;
+use WP_Post;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -29,7 +30,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Education' ) ) {
 		 *
 		 * @var array
 		 */
-		private $used_fields = array(
+		protected $used_fields = array(
 			'position',
 			'company',
 			'month_start',
@@ -39,7 +40,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Education' ) ) {
 			'still_working',
 			'role',
 			'industry',
-			'country',
+			'overseas',
 			'province',
 			'notes',
 		);
@@ -55,46 +56,11 @@ if ( ! class_exists( 'Muslimarkt\Model\Education' ) ) {
 		 * Education constructor.
 		 *
 		 * @param int $user_id id of the user.
-		 * @param bool|int $post_id id of the post.
+		 * @param bool|string|int|WP_Post $post_tag object of WP_Post, id of the post or slug of the post.
+		 * @param array $args args to create post.
 		 */
-		public function __construct( $user_id, $post_id = false ) {
-			parent::__construct( $user_id, $post_id );
-		}
-
-		public function get_details() {
-
-			// Get education base detail.
-			$this->get_base_details();
-
-			// Get additional details.
-			$details = $this->get_metas( $this->used_fields );
-
-			// Merge details.
-			$this->items = array_merge( $this->items, $details );
-		}
-
-		private function get_base_details() {
-			$this->items['id']   = $this->post->ID;
-			$this->items['slug'] = $this->post->post_name;
-		}
-
-		/**
-		 * Save education detail.
-		 *
-		 * @param array $args associate key=>value detail.
-		 */
-		public function save_details( $args ) {
-
-			// Loop all possible fields.
-			foreach ( $args as $arg_key => $arg_value ) {
-
-				// Make sure, field is allowed.
-				if ( in_array( $arg_key, $this->used_fields, true ) ) {
-
-					// Update the field.
-					$this->save_meta( $arg_key, $arg_value );
-				}
-			}
+		public function __construct( $user_id, $post_tag = false, $args = array() ) {
+			parent::__construct( $user_id, $post_tag, $args );
 		}
 	}
 }

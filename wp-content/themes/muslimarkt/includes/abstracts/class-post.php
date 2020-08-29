@@ -33,6 +33,13 @@ if ( ! class_exists( 'Muslimarkt\Post' ) ) {
 		public $post;
 
 		/**
+		 * Used fields variable.
+		 *
+		 * @var array
+		 */
+		protected $used_fields = array();
+
+		/**
 		 * Post type variable.
 		 *
 		 * @var string
@@ -142,17 +149,6 @@ if ( ! class_exists( 'Muslimarkt\Post' ) ) {
 		}
 
 		/**
-		 * Delete post.
-		 *
-		 * @param bool $force_delete whether soft or hard delete.
-		 *
-		 * @return false|WP_Post|null
-		 */
-		public function delete( $force_delete = false ) {
-			return wp_delete_post( $this->post->ID, $force_delete );
-		}
-
-		/**
 		 * Get post meta.
 		 *
 		 * @param string $key name of the meta.
@@ -201,6 +197,59 @@ if ( ! class_exists( 'Muslimarkt\Post' ) ) {
 		 */
 		private function get_random_post_name() {
 			return uniqid( '', true );
+		}
+
+		/**
+		 * Delete post.
+		 *
+		 * @param bool $force_delete whether soft or hard delete.
+		 *
+		 * @return false|WP_Post|null
+		 */
+		public function delete( $force_delete = false ) {
+			return wp_delete_post( $this->post->ID, $force_delete );
+		}
+		
+		/**
+		 * Get experience details.
+		 */
+		public function get_details() {
+
+			// Get experience base detail.
+			$this->get_base_details();
+
+			// Get additional details.
+			$details = $this->get_metas( $this->used_fields );
+
+			// Merge details.
+			$this->items = array_merge( $this->items, $details );
+		}
+
+		/**
+		 * Get post base details.
+		 */
+		private function get_base_details() {
+			$this->items['id']   = $this->post->ID;
+			$this->items['slug'] = $this->post->post_name;
+		}
+
+		/**
+		 * Save experience detail.
+		 *
+		 * @param array $args associate key=>value detail.
+		 */
+		public function save_details( $args ) {
+
+			// Loop all possible fields.
+			foreach ( $args as $arg_key => $arg_value ) {
+
+				// Make sure, field is allowed.
+				if ( in_array( $arg_key, $this->used_fields, true ) ) {
+
+					// Update the field.
+					$this->save_meta( $arg_key, $arg_value );
+				}
+			}
 		}
 	}
 }
