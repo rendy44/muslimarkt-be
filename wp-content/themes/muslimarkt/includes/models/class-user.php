@@ -281,8 +281,8 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 		public function get_experiences() {
 			$experiences = new Post(
 				array(
-					'post_type'   => 'experience',
-					'post_author' => $this->user->ID
+					'post_type' => 'experience',
+					'author'    => $this->user->ID
 				) );
 
 			// Build the query.
