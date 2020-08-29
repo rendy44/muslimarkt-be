@@ -307,5 +307,38 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 			}
 			wp_reset_postdata();
 		}
+
+		/**
+		 * Get user educations.
+		 */
+		public function get_educations() {
+			$educations = new Post(
+				array(
+					'post_type' => 'education',
+					'author'    => $this->user->ID,
+					'order'     => 'ASC',
+				), false );
+
+			// Build the query.
+			$query = $educations->get_query();
+
+			// Reset object.
+			$this->items = array();
+
+			// Loop the query.
+			while ( $query->have_posts() ) {
+				$query->the_post();
+
+				// Instance a new education.
+				$education = new Education( $this->user->ID, get_the_ID() );
+
+				// Load education details.
+				$education->get_details();
+
+				// Store education details.
+				$this->items[] = $education->items;
+			}
+			wp_reset_postdata();
+		}
 	}
 }

@@ -31,18 +31,12 @@ if ( ! class_exists( 'Muslimarkt\Model\Education' ) ) {
 		 * @var array
 		 */
 		protected $used_fields = array(
-			'position',
-			'company',
-			'month_start',
-			'year_start',
-			'month_end',
-			'year_end',
-			'still_working',
-			'role',
-			'industry',
-			'overseas',
-			'province',
-			'notes',
+			'institute',
+			'qualification',
+			'major',
+			'graduate_month',
+			'graduate_year',
+			'notes'
 		);
 
 		/**
