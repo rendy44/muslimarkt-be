@@ -111,6 +111,9 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		 */
 		public function __construct( $request, $use_param = false ) {
 
+			// Get user key.
+			$this->user_key = $request->get_param( 'key' );
+
 			// Get decoded params.
 			$this->array_args = $use_param ? $request->get_params() : json_decode( $request->get_body(), true );
 
@@ -314,7 +317,6 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 
 			// Prepare default args.
 			$default_args = array(
-				'key'      => false,
 				'email'    => false,
 				'password' => false
 			);
@@ -324,7 +326,6 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 
 			// Save individual args.
 			$this->detail_slug   = $this->array_args['slug'];
-			$this->user_key      = $this->array_args['key'];
 			$this->user_email    = $this->array_args['email'];
 			$this->user_password = $this->array_args['password'];
 		}

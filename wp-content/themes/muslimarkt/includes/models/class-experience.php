@@ -10,6 +10,7 @@
 namespace Muslimarkt\Model;
 
 use Muslimarkt\Post;
+use WP_Post;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -39,7 +40,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 			'still_working',
 			'role',
 			'industry',
-			'luar_negeri',
+			'overseas',
 			'province',
 			'notes',
 		);
@@ -54,9 +55,9 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 		/**
 		 * Experience constructor.
 		 *
-		 * @param $user_id
-		 * @param bool $post_tag
-		 * @param array $args
+		 * @param int $user_id id of the user.
+		 * @param bool|string|int|WP_Post $post_tag object of WP_Post, id of the post or slug of the post.
+		 * @param array $args args to create post.
 		 */
 		public function __construct( $user_id, $post_tag = false, $args = array() ) {
 			parent::__construct( $user_id, $post_tag, $args );

@@ -129,7 +129,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Experience' ) ) {
 				function () use ( $auth ) {
 
 					// Create a new experience.
-					$exp = new \Muslimarkt\Model\Experience( $auth );
+					$exp = new \Muslimarkt\Model\Experience( $auth->user_id );
 
 					// Save experience's details.
 					$exp->save_details( $auth->get_args() );
