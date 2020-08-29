@@ -114,7 +114,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Post' ) ) {
 		 * Save transient.
 		 */
 		private function save_transient() {
-			set_transient( $this->get_transient_key(), $this->query, DAY_IN_SECONDS );
+			set_transient( $this->get_transient_key(), $this->query, HOUR_IN_SECONDS );
 		}
 	}
 }
