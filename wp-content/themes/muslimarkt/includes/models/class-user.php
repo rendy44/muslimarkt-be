@@ -284,7 +284,7 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 					'post_type' => 'experience',
 					'author'    => $this->user->ID,
 					'order'     => 'ASC',
-				) );
+				), false );
 
 			// Build the query.
 			$query = $experiences->get_query();
