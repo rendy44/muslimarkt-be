@@ -50,7 +50,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Post' ) ) {
 		 * Post constructor.
 		 *
 		 * @param array $args query args.
-		 * @param string $transient_key optional transient key.
+		 * @param string|bool $transient_key optional transient key.
 		 */
 		public function __construct( $args = array(), $transient_key = '' ) {
 
@@ -100,7 +100,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Post' ) ) {
 		 * @return bool|mixed
 		 */
 		private function maybe_get_transient() {
-			return get_transient( $this->get_transient_key() );
+			return false !== $this->transient_key ? get_transient( $this->get_transient_key() ) : false;
 		}
 
 		/**

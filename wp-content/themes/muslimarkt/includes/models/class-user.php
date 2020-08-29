@@ -282,7 +282,8 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 			$experiences = new Post(
 				array(
 					'post_type' => 'experience',
-					'author'    => $this->user->ID
+					'author'    => $this->user->ID,
+					'order'     => 'ASC',
 				) );
 
 			// Build the query.
