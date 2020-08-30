@@ -13,7 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use Muslimarkt\Abstracts\Rest;
 use Muslimarkt\Auth;
+use Muslimarkt\Model\Employee;
 use Muslimarkt\Singleton;
 use WP_REST_Request;
 
@@ -84,7 +86,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Education' ) ) {
 				function () use ( $auth ) {
 
 					// Get user detail.
-					$user = new \Muslimarkt\Model\User( $auth->user_id );
+					$user = new Employee( $auth->user_id );
 
 					// Get user's educations.
 					$user->get_educations();

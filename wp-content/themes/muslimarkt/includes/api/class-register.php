@@ -9,9 +9,10 @@
 
 namespace Muslimarkt\Rest;
 
+use Muslimarkt\Abstracts\Rest;
 use Muslimarkt\Auth;
+use Muslimarkt\Model\Employee;
 use Muslimarkt\Singleton;
-use Muslimarkt\Model\User;
 use WP_REST_Request;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -69,7 +70,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Register' ) ) {
 			$auth = new Auth( $request );
 
 			// Process create a user.
-			$user = new User( false, $auth->get_args() );
+			$user = new Employee( false, $auth->get_args() );
 
 			// Validate content.
 			$auth->content_on_error( $user->message );

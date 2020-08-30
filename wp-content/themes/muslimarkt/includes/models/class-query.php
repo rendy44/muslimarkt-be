@@ -1,6 +1,6 @@
 <?php
 /**
- * Post query class.
+ * Query query class.
  *
  * @author Rendy
  * @package Muslimarkt.
@@ -15,14 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Muslimarkt\Model\Post' ) ) {
+if ( ! class_exists( 'Muslimarkt\Model\Query' ) ) {
 
 	/**
-	 * Class Post
+	 * Class Query
 	 *
 	 * @package Muslimarkt\Model
 	 */
-	class Post {
+	class Query {
 		use Result;
 
 		/**
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Post' ) ) {
 		private $transient_key = '';
 
 		/**
-		 * Post constructor.
+		 * Query constructor.
 		 *
 		 * @param array $args query args.
 		 * @param string|bool $transient_key optional transient key.

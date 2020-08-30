@@ -9,7 +9,7 @@
 
 namespace Muslimarkt\Model;
 
-use Muslimarkt\Post;
+use Muslimarkt\Abstracts\Post;
 use WP_Post;
 
 if ( ! defined( 'ABSPATH' ) ) {

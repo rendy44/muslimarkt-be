@@ -7,15 +7,17 @@
  * @version 0.0.1
  */
 
-namespace Muslimarkt;
+namespace Muslimarkt\Abstracts;
 
+use Muslimarkt\Helper;
+use Muslimarkt\Result;
 use WP_Post;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Muslimarkt\Post' ) ) {
+if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 
 	/**
 	 * Class Post

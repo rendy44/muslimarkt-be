@@ -8,6 +8,7 @@
 
 namespace Muslimarkt\Type;
 
+use Muslimarkt\Abstracts\Type;
 use Muslimarkt\Singleton;
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -9,7 +9,9 @@
 
 namespace Muslimarkt\Rest;
 
+use Muslimarkt\Abstracts\Rest;
 use Muslimarkt\Auth;
+use Muslimarkt\Model\Employee;
 use Muslimarkt\Singleton;
 use WP_REST_Request;
 
@@ -63,7 +65,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 				function () use ( $auth ) {
 
 					// Get user detail.
-					$user = new \Muslimarkt\Model\User( $auth->user_id );
+					$user = new Employee( $auth->user_id );
 
 					// Re-validate.
 					$auth->content_on_success( $user->items );
@@ -106,7 +108,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 				function () use ( $auth ) {
 
 					// Instance a new user.
-					$user = new \Muslimarkt\Model\User( $auth->user_id, array(), true );
+					$user = new Employee( $auth->user_id, array(), true );
 
 					// Update the user.
 					$user->update( $auth->get_args() );

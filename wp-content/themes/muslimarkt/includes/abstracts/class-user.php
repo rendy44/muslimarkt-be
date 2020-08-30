@@ -1,14 +1,13 @@
 <?php
 /**
- * Class User
- * Class to manager user data.
+ * Abstract class user.
  *
  * @author Rendy
  * @package Muslimarkt
  * @version 0.0.1
  */
 
-namespace Muslimarkt\Model;
+namespace Muslimarkt\Abstracts;
 
 use Muslimarkt\Helper;
 use Muslimarkt\Result;
@@ -18,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
+if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 
 	/**
 	 * Class User
 	 *
 	 * @package Muslimarkt
 	 */
-	final class User {
+	abstract class User {
 		use Result;
 
 		/**
@@ -40,22 +39,7 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 		 *
 		 * @var array
 		 */
-		private $user_fields = array(
-			'day_birth',
-			'month_birth',
-			'year_birth',
-			'phone',
-			'address',
-			'postal',
-			'city',
-			'province',
-			'sex',
-			'id_type',
-			'no_id',
-			'notes',
-			'user_key',
-			'is_profile_complete',
-		);
+		protected $user_fields = array();
 
 		/**
 		 * User constructor.
@@ -75,7 +59,7 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 
 				// Validate the user.
 				if ( ! $user_data ) {
-					$this->message[] = __( 'Ikun tidak valid', 'muslimarkt' );
+					$this->message[] = __( 'Akun tidak valid', 'muslimarkt' );
 				} else {
 
 					// Save user data object.
@@ -166,7 +150,7 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 		 *
 		 * @return mixed
 		 */
-		private function get_meta( $key ) {
+		protected function get_meta( $key ) {
 			return Helper::get_user_meta( $key, $this->user->ID );
 		}
 
@@ -177,7 +161,7 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 		 *
 		 * @return array
 		 */
-		private function get_metas( $keys ) {
+		protected function get_metas( $keys ) {
 			return Helper::get_user_metas( $keys, $this->user->ID );
 		}
 
@@ -187,7 +171,7 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 		 * @param string $key name of the meta.
 		 * @param mixed $value value of the meta.
 		 */
-		private function save_meta( $key, $value ) {
+		protected function save_meta( $key, $value ) {
 			Helper::save_user_meta( $key, $value, $this->user->ID );
 		}
 
@@ -196,7 +180,7 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 		 *
 		 * @param array $args associate key => value of the meta.
 		 */
-		private function save_metas( $args ) {
+		protected function save_metas( $args ) {
 			foreach ( $args as $arg_key => $arg_value ) {
 
 				// Always make sure that key is allowed.
@@ -260,7 +244,7 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 		 *
 		 * @param array $args predefined values, or leave it empty to get value from the db.
 		 */
-		private function generate_user_details( $args = array() ) {
+		protected function generate_user_details( $args = array() ) {
 
 			// Get user details.
 			$details = ! empty( $args ) ? $args : $this->get_metas( $this->user_fields );
@@ -273,72 +257,6 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 				// Override details.
 				$this->items = $details;
 			}
-		}
-
-		/**
-		 * Get user experiences.
-		 */
-		public function get_experiences() {
-			$experiences = new Post(
-				array(
-					'post_type' => 'experience',
-					'author'    => $this->user->ID,
-					'order'     => 'ASC',
-				), false );
-
-			// Build the query.
-			$query = $experiences->get_query();
-
-			// Reset object.
-			$this->items = array();
-
-			// Loop the query.
-			while ( $query->have_posts() ) {
-				$query->the_post();
-
-				// Instance a new experience.
-				$experience = new Experience( $this->user->ID, get_the_ID() );
-
-				// Load experience details.
-				$experience->get_details();
-
-				// Store experience details.
-				$this->items[] = $experience->items;
-			}
-			wp_reset_postdata();
-		}
-
-		/**
-		 * Get user educations.
-		 */
-		public function get_educations() {
-			$educations = new Post(
-				array(
-					'post_type' => 'education',
-					'author'    => $this->user->ID,
-					'order'     => 'ASC',
-				), false );
-
-			// Build the query.
-			$query = $educations->get_query();
-
-			// Reset object.
-			$this->items = array();
-
-			// Loop the query.
-			while ( $query->have_posts() ) {
-				$query->the_post();
-
-				// Instance a new education.
-				$education = new Education( $this->user->ID, get_the_ID() );
-
-				// Load education details.
-				$education->get_details();
-
-				// Store education details.
-				$this->items[] = $education->items;
-			}
-			wp_reset_postdata();
 		}
 	}
 }

@@ -7,13 +7,13 @@
  * @version 0.0.1
  */
 
-namespace Muslimarkt\Type;
+namespace Muslimarkt\Abstracts;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Muslimarkt\Type\Type' ) ) {
+if ( ! class_exists( 'Muslimarkt\Abstracts\Type' ) ) {
 
 	/**
 	 * Class Type

@@ -7,7 +7,7 @@
  * @version 0.0.1
  */
 
-namespace Muslimarkt\Rest;
+namespace Muslimarkt\Abstracts;
 
 use WP_REST_Request;
 use WP_REST_Server;
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Muslimarkt\Rest\Rest' ) ) {
+if ( ! class_exists( 'Muslimarkt\Abstracts\Rest' ) ) {
 
 	/**
 	 * Class Rest
