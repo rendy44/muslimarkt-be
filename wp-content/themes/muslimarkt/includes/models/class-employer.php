@@ -47,7 +47,6 @@ if ( ! class_exists( 'Muslimarkt\Model\Employer' ) ) {
 		 * @param bool $no_fetch whether skip to get user details value.
 		 */
 		public function __construct( $user_id = false, $args = array(), $no_fetch = false ) {
-			parent::__construct( $user_id, $args, $no_fetch );
 
 			// If the class is called upon creating a new user.
 			if ( ! $user_id ) {
@@ -55,6 +54,8 @@ if ( ! class_exists( 'Muslimarkt\Model\Employer' ) ) {
 				// Add filter to modify user details.
 				add_filter( 'muslimarkt_new_user_generic_details', array( $this, 'manage_generic_details' ), 10, 2 );
 			}
+
+			parent::__construct( $user_id, $args, $no_fetch );
 		}
 
 		/**

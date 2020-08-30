@@ -11,7 +11,7 @@ namespace Muslimarkt\Rest;
 
 use Muslimarkt\Abstracts\Rest;
 use Muslimarkt\Auth;
-use Muslimarkt\Model\Employee;
+use Muslimarkt\Model\Employer;
 use Muslimarkt\Singleton;
 use WP_REST_Request;
 
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Company' ) ) {
 			$auth = new Auth( $request );
 
 			// Process create a user.
-			$user = new Employee( false, $auth->get_args() );
+			$user = new Employer( false, $auth->get_args() );
 
 			// Validate content.
 			$auth->content_on_error( $user->message );
