@@ -125,10 +125,21 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 						$this->is_error = false;
 
 						// Save user details.
-						$this->save_metas( array(
+						$user_details = array(
 							'user_key'            => $this->generate_user_key_by_email( $args['email'] ),
-							'is_profile_complete' => false
-						) );
+							'is_profile_complete' => false,
+						);
+
+						/**
+						 * Muslimarkt new user generic details filter hook.
+						 *
+						 * @param array $user_details current user details.
+						 * @param int $new_user id of newly created user.
+						 */
+						$user_details = apply_filters( 'muslimarkt_new_user_generic_details', $user_details, $new_user );
+
+						// Save user details.
+						$this->save_metas( $user_details );
 					}
 				}
 			}
