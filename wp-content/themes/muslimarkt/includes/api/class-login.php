@@ -11,9 +11,10 @@ namespace Muslimarkt\Rest;
 
 use Muslimarkt\Abstracts\Rest;
 use Muslimarkt\Auth;
+use Muslimarkt\Helper;
 use Muslimarkt\Model\Employee;
+use Muslimarkt\Model\Employer;
 use Muslimarkt\Singleton;
-use Muslimarkt\Model\User;
 use WP_REST_Request;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -74,8 +75,19 @@ if ( ! class_exists( 'Muslimarkt\Rest\Login' ) ) {
 			$auth->success_callback(
 				function () use ( $auth ) {
 
-					// Get user detail.
-					$user = new Employee( $auth->user_id );
+					// Check whether the user is employee or employer.
+					$employer = Helper::get_user_meta( 'recruiter', $auth->user_id );
+
+					// Validate whether user is employer.
+					if ( $employer ) {
+
+						// Get employer detail.
+						$user = new Employer( $auth->user_id );
+					} else {
+
+						// Get employee detail.
+						$user = new Employee( $auth->user_id );
+					}
 
 					// Re-validate.
 					$auth->content_on_success( $user->items );
