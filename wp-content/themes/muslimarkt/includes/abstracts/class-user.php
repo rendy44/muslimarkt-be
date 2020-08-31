@@ -140,9 +140,47 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 
 						// Save user details.
 						$this->save_metas( $user_details );
+
+						// Maybe get extra args.
+						$extra_args = $this->get_extra_registration_metas( $args );
+
+						// Validate extra args.
+						if ( ! empty( $extra_args ) ) {
+
+							// Save extra args.
+							$this->save_metas( $extra_args );
+						}
 					}
 				}
 			}
+		}
+
+		/**
+		 * Maybe add extra metas.
+		 *
+		 * @param array $args args from request.
+		 *
+		 * @return array
+		 */
+		private function get_extra_registration_metas( $args ) {
+
+			$used_args = array();
+
+			// Validate and loop args.
+			if ( ! empty( $args ) ) {
+
+
+				// Loop all used fields.
+				foreach ( $this->user_fields as $field ) {
+
+					// If args is defined.
+					if ( ! empty( $args[ $field ] ) ) {
+						$used_args[ $field ] = $args[ $field ];
+					}
+				}
+			}
+
+			return $used_args;
 		}
 
 		/**
