@@ -44,35 +44,12 @@ if ( ! class_exists( 'Muslimarkt\Rest\User' ) ) {
 		protected $use_put = true;
 
 		/**
-		 * Override use get variable.
-		 *
-		 * @var bool
-		 */
-		protected $use_get = true;
-
-		/**
 		 * Callback for get method.
 		 *
 		 * @param WP_REST_Request $request request object.
 		 */
 		function get_callback( $request ) {
-
-			// Instance a new auth.
-			$auth = new Auth( $request, true );
-
-			// Create callback.
-			$auth->success_callback(
-				function () use ( $auth ) {
-
-					// Get user detail.
-					$user = new Employee( $auth->user_id );
-
-					// Re-validate.
-					$auth->content_on_success( $user->items );
-				},
-				false
-			);
-			$auth->validate();
+			// TODO: Implement get_callback method.
 		}
 
 		/**
