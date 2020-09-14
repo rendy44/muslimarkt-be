@@ -128,6 +128,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 						$user_details = array(
 							'user_key'            => $this->generate_user_key_by_email( $args['email'] ),
 							'is_profile_complete' => false,
+							'active'              => false,
 						);
 
 						/**

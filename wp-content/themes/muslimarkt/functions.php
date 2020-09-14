@@ -37,6 +37,7 @@ require_once TEMP_DIR . '/includes/api/class-account.php';
 require_once TEMP_DIR . '/includes/api/class-user.php';
 require_once TEMP_DIR . '/includes/api/class-company.php';
 require_once TEMP_DIR . '/includes/models/class-query.php';
+require_once TEMP_DIR . '/includes/models/class-user.php';
 require_once TEMP_DIR . '/includes/models/class-employee.php';
 require_once TEMP_DIR . '/includes/models/class-employer.php';
 require_once TEMP_DIR . '/includes/models/class-experience.php';
