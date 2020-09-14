@@ -34,6 +34,7 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 		protected $user_fields = array(
 			'user_key',
 			'is_profile_complete',
+			'active',
 		);
 
 		/**

@@ -11,7 +11,6 @@ namespace Muslimarkt\Rest;
 
 use Muslimarkt\Abstracts\Rest;
 use Muslimarkt\Auth;
-use Muslimarkt\Model\Employee;
 use Muslimarkt\Singleton;
 use WP_REST_Request;
 
@@ -70,11 +69,11 @@ if ( ! class_exists( 'Muslimarkt\Rest\Register' ) ) {
 			$auth = new Auth( $request );
 
 			// Process create a user.
-			$user = new Employee( false, $auth->get_args() );
+			$user = new \Muslimarkt\Model\User( false, $auth->get_args() );
 
 			// Validate content.
 			$auth->content_on_error( $user->message );
-			$auth->content_on_success( __( 'Pendaftaran sukses, silahkan masuk dengan email dan kata sandi', 'muslimarkt' ) );
+			$auth->content_on_success( __( 'Pendaftaran sukses, silahkan periksa email Anda', 'muslimarkt' ) );
 			$auth->parse_api( $user );
 		}
 
