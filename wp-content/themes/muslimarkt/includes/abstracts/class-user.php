@@ -142,6 +142,14 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 						// Save user details.
 						$this->save_metas( $user_details );
 
+						/**
+						 * Muslimarkt after creating user action hook.
+						 *
+						 * @param WP_User $new_user object of newly created user.
+						 * @param array $user_details array of additional user details.
+						 */
+						do_action( 'muslimarkt_after_creating_user', $new_user, $user_details );
+
 						// Maybe get extra args.
 						$extra_args = $this->get_extra_registration_metas( $args );
 
@@ -190,7 +198,14 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 		 * @return string
 		 */
 		private function generate_username() {
-			return uniqid();
+			$unique_id = uniqid();
+
+			/**
+			 * Muslimarkt unique id filter hook.
+			 *
+			 * @param string $unique_id generated unique id.
+			 */
+			return apply_filters( 'muslimarkt_unique_id', $unique_id );
 		}
 
 		/**
@@ -250,7 +265,15 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 		 * @return bool|false|string
 		 */
 		private function generate_user_key_by_email( $email ) {
-			return Helper::encrypt( $email );
+			$user_key = Helper::encrypt( $email );
+
+			/**
+			 * Muslimarkt user key filter hook.
+			 *
+			 * @param string $user_key currently generated user key.
+			 * @param string $email email address.
+			 */
+			return apply_filters( 'muslimarkt_user_key', $user_key, $email );
 		}
 
 		/**
