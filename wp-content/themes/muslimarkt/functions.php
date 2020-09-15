@@ -27,6 +27,7 @@ require_once TEMP_DIR . '/includes/abstracts/class-post.php';
 require_once TEMP_DIR . '/includes/abstracts/class-type.php';
 require_once TEMP_DIR . '/includes/abstracts/class-rest.php';
 require_once TEMP_DIR . '/includes/abstracts/class-user.php';
+require_once TEMP_DIR . '/includes/abstracts/class-email.php';
 require_once TEMP_DIR . '/includes/types/class-experience.php';
 require_once TEMP_DIR . '/includes/types/class-education.php';
 require_once TEMP_DIR . '/includes/api/class-register.php';

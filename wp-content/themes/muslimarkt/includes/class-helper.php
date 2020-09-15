@@ -207,5 +207,20 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 
 			return $found_user->ID;
 		}
+
+		/**
+		 * Get template.
+		 *
+		 * @param string $file_name name of the template.
+		 * @param array $args additional args.
+		 */
+		public static function get_template( $file_name, $args = array() ) {
+
+			// Set default path folder.
+			$template_path = TEMP_PATH . '/templates';
+
+			// Load the template.
+			load_template( "{$template_path}/{$file_name}.php", false, $args );
+		}
 	}
 }
