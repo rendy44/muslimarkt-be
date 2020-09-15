@@ -28,7 +28,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Email' ) ) {
 		 *
 		 * @var array
 		 */
-		private $recipients = array();
+		private $recipients;
 
 		/**
 		 * Email subject variable.
@@ -102,10 +102,27 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Email' ) ) {
 		}
 
 		/**
+		 * Get formatted email subject.
+		 *
+		 * @return mixed|void
+		 */
+		private function get_formatted_subject() {
+			$subject = sprintf( '%s - %s', get_bloginfo( 'name' ), $this->subject );
+
+			/**
+			 * Muslimarkt email subject filter hook.
+			 *
+			 * @param string $subject current email subject.
+			 * @param Email $this object of the current mailer.
+			 */
+			return apply_filters( 'muslimarkt_email_subject', $subject, $this );
+		}
+
+		/**
 		 * Process send the email.
 		 */
 		public function send() {
-			wp_mail( $this->recipients, $this->subject, $this->get_formatted_body(), $this->headers );
+			wp_mail( $this->recipients, $this->get_formatted_subject(), $this->get_formatted_body(), $this->headers );
 		}
 	}
 }
