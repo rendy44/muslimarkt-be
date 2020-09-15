@@ -44,7 +44,7 @@ if ( ! class_exists( 'Muslimarkt\Emails\Verification' ) ) {
 		 * Get plain body.
 		 */
 		protected function plain_body() {
-			Helper::get_template( 'emails/plain/verification' );
+			Helper::get_template( 'email/plain/verification' );
 		}
 	}
 }

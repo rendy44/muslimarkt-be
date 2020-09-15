@@ -148,7 +148,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 						 * @param WP_User $new_user object of newly created user.
 						 * @param array $user_details array of additional user details.
 						 */
-						do_action( 'muslimarkt_after_creating_user', $new_user, $user_details );
+						do_action( 'muslimarkt_after_creating_user', $this->user, $user_details );
 
 						// Maybe get extra args.
 						$extra_args = $this->get_extra_registration_metas( $args );

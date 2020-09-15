@@ -53,6 +53,18 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Email' ) ) {
 
 			// Save recipients.
 			$this->recipients = $recipients;
+
+			// Send email as html.
+			add_filter( 'wp_mail_content_type', array( $this, 'set_html_content_type' ) );
+		}
+
+		/**
+		 * Callback for setting email content type.
+		 *
+		 * @return string
+		 */
+		public function set_html_content_type() {
+			return 'text/html';
 		}
 
 		/**
@@ -123,6 +135,9 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Email' ) ) {
 		 */
 		public function send() {
 			wp_mail( $this->recipients, $this->get_formatted_subject(), $this->get_formatted_body(), $this->headers );
+
+			// Remove filter.
+			remove_filter( 'wp_mail_content_type', array( $this, 'set_html_content_type' ) );
 		}
 	}
 }
