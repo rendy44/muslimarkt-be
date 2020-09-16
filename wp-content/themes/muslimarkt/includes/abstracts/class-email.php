@@ -45,14 +45,25 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Email' ) ) {
 		protected $headers = array();
 
 		/**
+		 * Additional args variable.
+		 *
+		 * @var string|array|object|int|mixed
+		 */
+		protected $args;
+
+		/**
 		 * Email constructor.
 		 *
 		 * @param string|array $recipients recipients of the email.
+		 * @param string|array|object|int|mixed $args additional passed data.
 		 */
-		public function __construct( $recipients = array() ) {
+		public function __construct( $recipients = array(), $args = false ) {
 
 			// Save recipients.
 			$this->recipients = $recipients;
+
+			// Save property.
+			$this->args = $args;
 
 			// Send email as html.
 			add_filter( 'wp_mail_content_type', array( $this, 'set_html_content_type' ) );

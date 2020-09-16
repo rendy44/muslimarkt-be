@@ -16,6 +16,7 @@ defined( 'TEMP_DIR' ) || define( 'TEMP_DIR', get_template_directory() );
 defined( 'TEMP_URI' ) || define( 'TEMP_URI', get_template_directory_uri() );
 defined( 'TEMP_PATH' ) || define( 'TEMP_PATH', get_theme_file_path() );
 defined( 'TEMP_PREFIX' ) || define( 'TEMP_PREFIX', 'mslmrkt_' );
+defined( 'CLIENT_URL' ) || define( 'CLIENT_URL', 'http://localhost:3000' );
 
 // Require the dependency classes.
 require_once TEMP_DIR . '/includes/traits/class-result.php';

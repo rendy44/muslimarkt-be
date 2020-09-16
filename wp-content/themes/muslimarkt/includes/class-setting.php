@@ -30,7 +30,7 @@ if ( ! class_exists( 'Muslimarkt\Setting' ) ) {
 		 *
 		 * @var string
 		 */
-		private $allowed_origin = 'http://localhost:3000';
+		private $allowed_origin = CLIENT_URL;
 
 		private function __construct() {
 			// Handle preflight.

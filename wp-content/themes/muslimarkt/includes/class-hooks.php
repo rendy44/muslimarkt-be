@@ -43,7 +43,7 @@ if ( ! class_exists( 'Muslimarkt\Hooks' ) ) {
 		public function send_verification_email( WP_User $new_user, array $user_details ) {
 
 			// Instance a new mailer.
-			$mailer = new Verification( $new_user->user_email );
+			$mailer = new Verification( $new_user->user_email, $user_details['user_key'] );
 
 			// Send the email.
 			$mailer->send();

@@ -10,6 +10,7 @@ namespace Muslimarkt\Emails;
 
 use Muslimarkt\Abstracts\Email;
 use Muslimarkt\Helper;
+use WP_User;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -34,17 +35,18 @@ if ( ! class_exists( 'Muslimarkt\Emails\Verification' ) ) {
 		/**
 		 * Verification constructor.
 		 *
-		 * @param string|array $recipients email recipients.
+		 * @param string $recipient email recipients.
+		 * @param string $user_key user key.
 		 */
-		public function __construct( $recipients = array() ) {
-			parent::__construct( $recipients );
+		public function __construct( $recipient, $user_key ) {
+			parent::__construct( $recipient, $user_key );
 		}
 
 		/**
 		 * Get plain body.
 		 */
 		protected function plain_body() {
-			Helper::get_template( 'email/plain/verification' );
+			Helper::get_template( 'email/plain/verification', array( 'key' => $this->args ) );
 		}
 	}
 }
