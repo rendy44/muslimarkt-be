@@ -33,20 +33,16 @@ if ( ! class_exists( 'Muslimarkt\Model\Employee' ) ) {
 		 * @var array
 		 */
 		protected $user_fields = array(
-			'day_birth',
-			'month_birth',
-			'year_birth',
-			'phone',
+			'name',
+			'birthday_day',
+			'birthday_month',
+			'birthday_year',
 			'address',
-			'postal',
-			'city',
-			'province',
-			'sex',
-			'id_type',
-			'no_id',
+			'phone',
+			'identity_type',
+			'identity_value',
+			'gender',
 			'notes',
-			'user_key',
-			'is_profile_complete',
 		);
 
 		/**
