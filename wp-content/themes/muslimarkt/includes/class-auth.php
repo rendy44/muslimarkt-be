@@ -38,14 +38,14 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		 *
 		 * @var array|mixed
 		 */
-		private $array_args = array();
+		private $array_args;
 
 		/**
 		 * Detail slug variable.
 		 *
 		 * @var string
 		 */
-		private $detail_slug = '';
+		private $detail_slug;
 
 		/**
 		 * User key variable.
@@ -125,10 +125,12 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		/**
 		 * Get args from the request.
 		 *
+		 * @param string $key additional args name.
+		 *
 		 * @return array|mixed
 		 */
-		public function get_args() {
-			return $this->array_args;
+		public function get_args( $key = '' ) {
+			return $key ? $this->array_args[ $key ] : $this->array_args;
 		}
 
 		/**

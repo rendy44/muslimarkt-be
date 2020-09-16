@@ -46,6 +46,13 @@ if ( ! class_exists( 'Muslimarkt\Rest\Account' ) ) {
 		protected $use_get = true;
 
 		/**
+		 * Override use post variable.
+		 *
+		 * @var bool
+		 */
+		protected $use_post = true;
+
+		/**
 		 * Callback for get method.
 		 *
 		 * @param WP_REST_Request $request request object.
@@ -76,7 +83,30 @@ if ( ! class_exists( 'Muslimarkt\Rest\Account' ) ) {
 		 * @param WP_REST_Request $request request object.
 		 */
 		function post_callback( $request ) {
-			// TODO: Implement post_callback() method.
+
+			// Instance a new auth.
+			$auth = new Auth( $request );
+
+			// Create callback.
+			$auth->success_callback(
+				function () use ( $auth ) {
+
+					// Instance a new user.
+					$user = new \Muslimarkt\Model\User( $auth->user_id );
+
+					// Get account type.
+					$type = $auth->get_args( 'type' );
+
+					// Check maybe set as employer.
+					if ( 'employer' === $type ) {
+						$user->set_as_employer();
+					} else {
+						$user->set_as_employee();
+					}
+				},
+				false
+			);
+			$auth->validate();
 		}
 
 		/**
