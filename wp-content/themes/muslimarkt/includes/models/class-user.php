@@ -35,6 +35,7 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 			'user_key',
 			'is_profile_complete',
 			'active',
+			'type',
 		);
 
 		/**
@@ -59,14 +60,14 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 		 * Set user as an employee.
 		 */
 		public function set_as_employee() {
-			$this->save_meta( 'recruiter', false );
+			$this->save_meta( 'type', 'employee' );
 		}
 
 		/**
 		 * Set user as an employer.
 		 */
 		public function set_as_employer() {
-			$this->save_meta( 'recruiter', true );
+			$this->save_meta( 'type', 'employer' );
 		}
 	}
 }
