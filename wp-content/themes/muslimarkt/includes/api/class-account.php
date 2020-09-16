@@ -39,13 +39,6 @@ if ( ! class_exists( 'Muslimarkt\Rest\Account' ) ) {
 		protected $endpoint = 'account';
 
 		/**
-		 * Override use put variable.
-		 *
-		 * @var bool
-		 */
-		protected $use_put = true;
-
-		/**
 		 * Override use get variable.
 		 *
 		 * @var bool
