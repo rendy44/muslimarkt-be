@@ -49,6 +49,13 @@ if ( ! class_exists( 'Muslimarkt\Model\User' ) ) {
 		}
 
 		/**
+		 * Activate user account.
+		 */
+		public function activate_account() {
+			$this->save_meta( 'active', true );
+		}
+
+		/**
 		 * Set user as an employee.
 		 */
 		public function set_as_employee() {
