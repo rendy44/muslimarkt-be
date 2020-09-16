@@ -59,19 +59,8 @@ if ( ! class_exists( 'Muslimarkt\Rest\Account' ) ) {
 			$auth->success_callback(
 				function () use ( $auth ) {
 
-					// Check whether the user is employee or employer.
-					$employer = Helper::get_user_meta( 'recruiter', $auth->user_id );
-
-					// Validate whether user is employer.
-					if ( $employer ) {
-
-						// Get employer detail.
-						$user = new Employer( $auth->user_id );
-					} else {
-
-						// Get employee detail.
-						$user = new Employee( $auth->user_id );
-					}
+					// Instance a new user.
+					$user = new \Muslimarkt\Model\User( $auth->user_id );
 
 					// Re-validate.
 					$auth->content_on_success( $user->items );
