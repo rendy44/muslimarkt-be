@@ -33,15 +33,13 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 		protected $used_fields = array(
 			'position',
 			'company',
-			'month_start',
-			'year_start',
-			'month_end',
-			'year_end',
-			'still_working',
+			'date_start_month',
+			'date_start_year',
+			'date_end_month',
+			'date_end_year',
+			'date_end_cb',
 			'role',
 			'industry',
-			'overseas',
-			'province',
 			'notes',
 		);
 

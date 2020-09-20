@@ -286,9 +286,8 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 			// Update some fundamental fields.
 			$update = wp_update_user( array(
 				'ID'           => $this->user->ID,
-				'first_name'   => $args['first_name'],
-				'last_name'    => $args['last_name'],
-				'display_name' => $args['first_name'] . ' ' . $args['last_name']
+				'first_name'   => $args['name'],
+				'display_name' => $args['name'],
 			) );
 
 			// Validate the update.
