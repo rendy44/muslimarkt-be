@@ -48,7 +48,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 		 * @param array $args args which contains information to create a new user.
 		 * @param bool $no_fetch whether skip to get user details value.
 		 */
-		public function __construct( $user_id = false, $args = array(), $no_fetch = false ) {
+		protected function __construct( $user_id = false, $args = array(), $no_fetch = false ) {
 
 			// Check whether user_id is provided or not, if not, create a new one.
 			// If yes, get the existing user data.

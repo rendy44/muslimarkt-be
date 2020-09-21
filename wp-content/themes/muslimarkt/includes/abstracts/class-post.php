@@ -55,7 +55,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 		 * @param bool|string|int|WP_Post $post_tag object of WP_Post, id of the post or slug of the post.
 		 * @param array $args args to create post.
 		 */
-		public function __construct( $user_id, $post_tag = false, $args = array() ) {
+		protected function __construct( $user_id, $post_tag = false, $args = array() ) {
 
 			// Check whether post is defined or not.
 			if ( $post_tag ) {

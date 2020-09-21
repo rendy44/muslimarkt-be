@@ -34,9 +34,10 @@ if ( ! class_exists( 'Muslimarkt\Model\Education' ) ) {
 			'institute',
 			'qualification',
 			'major',
-			'month_graduate',
-			'year_graduate',
-			'notes'
+			'date_graduation_month',
+			'date_graduation_year',
+			'date_graduation_cb',
+			'notes',
 		);
 
 		/**

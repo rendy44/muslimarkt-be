@@ -84,7 +84,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Rest' ) ) {
 		/**
 		 * Rest constructor.
 		 */
-		public function __construct() {
+		protected function __construct() {
 
 			// Register settings.
 			add_action( 'rest_api_init', array( $this, 'register_api' ) );

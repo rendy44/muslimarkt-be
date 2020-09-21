@@ -57,7 +57,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Email' ) ) {
 		 * @param string|array $recipients recipients of the email.
 		 * @param string|array|object|int|mixed $args additional passed data.
 		 */
-		public function __construct( $recipients = array(), $args = false ) {
+		protected function __construct( $recipients = array(), $args = false ) {
 
 			// Save recipients.
 			$this->recipients = $recipients;
