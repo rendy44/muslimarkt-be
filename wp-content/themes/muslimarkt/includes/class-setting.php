@@ -46,8 +46,8 @@ if ( ! class_exists( 'Muslimarkt\Setting' ) ) {
 			$origin = get_http_origin();
 			if ( $origin === $this->allowed_origin ) {
 				header( "Access-Control-Allow-Origin: {$this->allowed_origin}" );
-				header( "Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE" );
-				header( "Access-Control-Allow-Credentials: true" );
+				header( 'Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE' );
+				header( 'Access-Control-Allow-Credentials: true' );
 				header( 'Access-Control-Allow-Headers: Origin, X-Requested-With, X-WP-Nonce, Content-Type, Accept, Authorization' );
 				if ( 'OPTIONS' === $_SERVER['REQUEST_METHOD'] ) {
 					status_header( 200 );
@@ -66,9 +66,13 @@ if ( ! class_exists( 'Muslimarkt\Setting' ) ) {
 		public function rest_filter_incoming_connections( $errors ) {
 			$origin = get_http_origin();
 			if ( $origin && $origin !== $this->allowed_origin ) {
-				return new WP_Error( 'forbidden_access', $origin, array(
-					'status' => 403
-				) );
+				return new WP_Error(
+					'forbidden_access',
+					$origin,
+					array(
+						'status' => 403,
+					)
+				);
 			}
 
 			return $errors;

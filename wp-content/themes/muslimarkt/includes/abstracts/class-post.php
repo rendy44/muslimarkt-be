@@ -51,9 +51,9 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 		/**
 		 * Post constructor.
 		 *
-		 * @param int $user_id id of the user.
+		 * @param int                     $user_id id of the user.
 		 * @param bool|string|int|WP_Post $post_tag object of WP_Post, id of the post or slug of the post.
-		 * @param array $args args to create post.
+		 * @param array                   $args args to create post.
 		 */
 		protected function __construct( $user_id, $post_tag = false, $args = array() ) {
 
@@ -82,7 +82,6 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 						// Add message.
 						$this->message[] = __( 'Pos id tidak ditemukan', 'muslimarkt' );
 					}
-
 				} elseif ( is_string( $post_tag ) ) {
 
 					// Get post based on slug.
@@ -154,7 +153,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 		 * Get post meta.
 		 *
 		 * @param string $key name of the meta.
-		 * @param bool $single whether single meta or not.
+		 * @param bool   $single whether single meta or not.
 		 *
 		 * @return mixed
 		 */
@@ -177,7 +176,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 		 * Save post meta.
 		 *
 		 * @param string $key name of the meta.
-		 * @param mixed $value value of the meta.
+		 * @param mixed  $value value of the meta.
 		 */
 		protected function save_meta( $key, $value ) {
 			Helper::save_post_meta( $key, $value, $this->post->ID );
@@ -211,7 +210,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 		public function delete( $force_delete = false ) {
 			return wp_delete_post( $this->post->ID, $force_delete );
 		}
-		
+
 		/**
 		 * Get experience details.
 		 */

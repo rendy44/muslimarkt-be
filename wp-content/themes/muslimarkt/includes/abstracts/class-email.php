@@ -54,7 +54,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Email' ) ) {
 		/**
 		 * Email constructor.
 		 *
-		 * @param string|array $recipients recipients of the email.
+		 * @param string|array                  $recipients recipients of the email.
 		 * @param string|array|object|int|mixed $args additional passed data.
 		 */
 		protected function __construct( $recipients = array(), $args = false ) {
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Email' ) ) {
 		/**
 		 * Get plain body.
 		 */
-		protected abstract function plain_body();
+		abstract protected function plain_body();
 
 		/**
 		 * Get html content header.

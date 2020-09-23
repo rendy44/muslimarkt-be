@@ -49,7 +49,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Query' ) ) {
 		/**
 		 * Query constructor.
 		 *
-		 * @param array $args query args.
+		 * @param array       $args query args.
 		 * @param string|bool $transient_key optional transient key.
 		 */
 		public function __construct( $args = array(), $transient_key = '' ) {

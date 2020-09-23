@@ -45,8 +45,8 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 		 * User constructor.
 		 *
 		 * @param int|bool $user_id id of the user.
-		 * @param array $args args which contains information to create a new user.
-		 * @param bool $no_fetch whether skip to get user details value.
+		 * @param array    $args args which contains information to create a new user.
+		 * @param bool     $no_fetch whether skip to get user details value.
 		 */
 		protected function __construct( $user_id = false, $args = array(), $no_fetch = false ) {
 
@@ -82,7 +82,6 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 					// Update result.
 					$this->is_error = false;
 				}
-
 			} else {
 
 				// we are going to create a new user.
@@ -178,7 +177,6 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 			// Validate and loop args.
 			if ( ! empty( $args ) ) {
 
-
 				// Loop all used fields.
 				foreach ( $this->user_fields as $field ) {
 
@@ -234,7 +232,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 		 * Save user meta.
 		 *
 		 * @param string $key name of the meta.
-		 * @param mixed $value value of the meta.
+		 * @param mixed  $value value of the meta.
 		 */
 		protected function save_meta( $key, $value ) {
 			Helper::save_user_meta( $key, $value, $this->user->ID );
@@ -284,11 +282,13 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 		public function update( $args ) {
 
 			// Update some fundamental fields.
-			$update = wp_update_user( array(
-				'ID'           => $this->user->ID,
-				'first_name'   => $args['name'],
-				'display_name' => $args['name'],
-			) );
+			$update = wp_update_user(
+				array(
+					'ID'           => $this->user->ID,
+					'first_name'   => $args['name'],
+					'display_name' => $args['name'],
+				)
+			);
 
 			// Validate the update.
 			if ( is_wp_error( $update ) ) {

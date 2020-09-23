@@ -21,6 +21,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Employee' ) ) {
 
 	/**
 	 * Class Employee
+	 *
 	 * @package Muslimarkt\Rest
 	 */
 	final class Employee extends Rest {

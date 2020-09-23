@@ -53,9 +53,9 @@ if ( ! class_exists( 'Muslimarkt\Model\Experience' ) ) {
 		/**
 		 * Experience constructor.
 		 *
-		 * @param int $user_id id of the user.
+		 * @param int                     $user_id id of the user.
 		 * @param bool|string|int|WP_Post $post_tag object of WP_Post, id of the post or slug of the post.
-		 * @param array $args args to create post.
+		 * @param array                   $args args to create post.
 		 */
 		public function __construct( $user_id, $post_tag = false, $args = array() ) {
 			parent::__construct( $user_id, $post_tag, $args );

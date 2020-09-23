@@ -38,7 +38,7 @@ if ( ! class_exists( 'Muslimarkt\Hooks' ) ) {
 		 * Callback for sending verification email to newly registered user.
 		 *
 		 * @param WP_User $new_user object of newly created user.
-		 * @param array $user_details array of additional user details.
+		 * @param array   $user_details array of additional user details.
 		 */
 		public function send_verification_email( WP_User $new_user, array $user_details ) {
 

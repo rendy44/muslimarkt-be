@@ -29,12 +29,12 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 		 * Perform encrypt and decrypt
 		 *
 		 * @param string $string plain string.
-		 * @param bool $is_decrypt whether decrypt or encrypt.
+		 * @param bool   $is_decrypt whether decrypt or encrypt.
 		 *
 		 * @return bool|false|string
 		 */
 		public static function encrypt( $string, $is_decrypt = false ) {
-			$encrypt_method = "AES-256-CBC";
+			$encrypt_method = 'AES-256-CBC';
 			$secret_key     = TEMP_PREFIX;
 			$secret_iv      = 'muslimarkt_secret_key';
 
@@ -57,9 +57,9 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 		 * Get post single meta.
 		 *
 		 * @param string $key name of the meta.
-		 * @param int $post_id id of the post.
-		 * @param bool $single whether display single value or not.
-		 * @param bool $use_prefix whether use prefix or not.
+		 * @param int    $post_id id of the post.
+		 * @param bool   $single whether display single value or not.
+		 * @param bool   $use_prefix whether use prefix or not.
 		 *
 		 * @return mixed
 		 */
@@ -73,8 +73,8 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 		 * Get post metas.
 		 *
 		 * @param array $keys collection of the post metas.
-		 * @param int $post_id id of the post.
-		 * @param bool $use_prefix whether use prefix or not.
+		 * @param int   $post_id id of the post.
+		 * @param bool  $use_prefix whether use prefix or not.
 		 *
 		 * @return array
 		 */
@@ -93,8 +93,8 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 		 * Get user metas.
 		 *
 		 * @param array $keys collection of the user metas.
-		 * @param int $user_id id of the user.
-		 * @param bool $use_prefix whether use prefix or not.
+		 * @param int   $user_id id of the user.
+		 * @param bool  $use_prefix whether use prefix or not.
 		 *
 		 * @return array
 		 */
@@ -113,9 +113,9 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 		 * Get user single meta.
 		 *
 		 * @param string $key name of the meta.
-		 * @param int $user_id id of the user.
-		 * @param bool $single whether display single value or not.
-		 * @param bool $use_prefix whether use prefix or not.
+		 * @param int    $user_id id of the user.
+		 * @param bool   $single whether display single value or not.
+		 * @param bool   $use_prefix whether use prefix or not.
 		 *
 		 * @return mixed
 		 */
@@ -129,9 +129,9 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 		 * Save post meta.
 		 *
 		 * @param string $key name of the meta key.
-		 * @param mixed $value value of the meta.
-		 * @param int $post_id id of the post.
-		 * @param bool $use_prefix whether save with prefix or not.
+		 * @param mixed  $value value of the meta.
+		 * @param int    $post_id id of the post.
+		 * @param bool   $use_prefix whether save with prefix or not.
 		 */
 		public static function save_post_meta( $key, $value, $post_id, $use_prefix = true ) {
 			$key = $use_prefix ? TEMP_PREFIX . $key : $key;
@@ -143,8 +143,8 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 		 * Save post metas.
 		 *
 		 * @param array $values collection key=>value of the meta.
-		 * @param int $post_id id of the post.
-		 * @param bool $use_prefix whether use prefix or not.
+		 * @param int   $post_id id of the post.
+		 * @param bool  $use_prefix whether use prefix or not.
 		 */
 		public static function save_post_metas( $values, $post_id, $use_prefix = true ) {
 			if ( ! empty( $values ) ) {
@@ -158,9 +158,9 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 		 * Save user meta.
 		 *
 		 * @param string $key name of the meta key.
-		 * @param mixed $value value of the meta.
-		 * @param int $user_id id of the user.
-		 * @param bool $use_prefix whether save with prefix or not.
+		 * @param mixed  $value value of the meta.
+		 * @param int    $user_id id of the user.
+		 * @param bool   $use_prefix whether save with prefix or not.
 		 */
 		public static function save_user_meta( $key, $value, $user_id, $use_prefix = true ) {
 			$key = $use_prefix ? TEMP_PREFIX . $key : $key;
@@ -172,8 +172,8 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 		 * Save user metas.
 		 *
 		 * @param array $values collection key=>value of the meta.
-		 * @param int $user_id id of the user.
-		 * @param bool $use_prefix whether use prefix or not.
+		 * @param int   $user_id id of the user.
+		 * @param bool  $use_prefix whether use prefix or not.
 		 */
 		public static function save_user_metas( $values, $user_id, $use_prefix = true ) {
 			if ( ! empty( $values ) ) {
@@ -212,7 +212,7 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 		 * Get template.
 		 *
 		 * @param string $file_name name of the template.
-		 * @param array $args additional args.
+		 * @param array  $args additional args.
 		 */
 		public static function get_template( $file_name, $args = array() ) {
 

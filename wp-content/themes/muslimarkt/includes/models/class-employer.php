@@ -43,8 +43,8 @@ if ( ! class_exists( 'Muslimarkt\Model\Employer' ) ) {
 		 * User constructor.
 		 *
 		 * @param int|bool $user_id id of the user.
-		 * @param array $args args which contains information to create a new user.
-		 * @param bool $no_fetch whether skip to get user details value.
+		 * @param array    $args args which contains information to create a new user.
+		 * @param bool     $no_fetch whether skip to get user details value.
 		 */
 		public function __construct( $user_id = false, $args = array(), $no_fetch = false ) {
 
@@ -62,7 +62,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Employer' ) ) {
 		 * Callback for modifying user details.
 		 *
 		 * @param array $user_details default user details.
-		 * @param int $new_user id od newly created user.
+		 * @param int   $new_user id od newly created user.
 		 *
 		 * @return array
 		 */

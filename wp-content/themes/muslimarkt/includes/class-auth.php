@@ -107,7 +107,7 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		 * Auth constructor.
 		 *
 		 * @param WP_REST_Request $request request object.
-		 * @param bool $use_param whether use params or body to be parsed.
+		 * @param bool            $use_param whether use params or body to be parsed.
 		 */
 		public function __construct( $request, $use_param = false ) {
 
@@ -188,7 +188,7 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 						$credentials = array(
 							'user_login'    => $this->user_email,
 							'user_password' => $this->user_password,
-							'remember'      => true
+							'remember'      => true,
 						);
 
 						// Do login;
@@ -226,7 +226,7 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		 * Parse api result.
 		 *
 		 * @param bool|Result|mixed $obj object that will be validated.
-		 * @param bool $with_callback whether trigger callback or not.
+		 * @param bool              $with_callback whether trigger callback or not.
 		 */
 		public function parse_api( $obj = false, $with_callback = true ) {
 
@@ -277,7 +277,7 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		 * Save callback;
 		 *
 		 * @param callback $callback callback function.
-		 * @param bool $force_stop whether callback completely override success or not.
+		 * @param bool     $force_stop whether callback completely override success or not.
 		 */
 		public function success_callback( $callback, $force_stop = true ) {
 			$this->callback       = $callback;
@@ -321,7 +321,7 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 			// Prepare default args.
 			$default_args = array(
 				'email'    => false,
-				'password' => false
+				'password' => false,
 			);
 
 			// Parse args.
