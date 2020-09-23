@@ -32,6 +32,9 @@ if ( ! class_exists( 'Muslimarkt\Setting' ) ) {
 		 */
 		private $allowed_origin = CLIENT_URL;
 
+		/**
+		 * Setting constructor.
+		 */
 		private function __construct() {
 			// Handle preflight.
 			add_action( 'init', array( $this, 'handle_preflight' ) );

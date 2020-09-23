@@ -53,7 +53,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Employee' ) ) {
 		 *
 		 * @param WP_REST_Request $request request object.
 		 */
-		function get_callback( $request ) {
+		public function get_callback( $request ) {
 
 			// Instance a new auth.
 			$auth = new Auth( $request, true );
@@ -78,7 +78,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Employee' ) ) {
 		 *
 		 * @param WP_REST_Request $request request object.
 		 */
-		function get_detail_callback( $request ) {
+		public function get_detail_callback( $request ) {
 			// TODO: Implement get_detail_callback() method.
 		}
 
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Employee' ) ) {
 		 *
 		 * @param WP_REST_Request $request request object.
 		 */
-		function post_callback( $request ) {
+		public function post_callback( $request ) {
 			// TODO: Implement post_callback() method.
 		}
 
@@ -96,7 +96,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Employee' ) ) {
 		 *
 		 * @param WP_REST_Request $request request object.
 		 */
-		function delete_callback( $request ) {
+		public function delete_callback( $request ) {
 			// TODO: Implement delete_callback() method.
 		}
 
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Employee' ) ) {
 		 *
 		 * @param WP_REST_Request $request request object.
 		 */
-		function put_callback( $request ) {
+		public function put_callback( $request ) {
 
 			// Instance a new auth.
 			$auth = new Auth( $request );

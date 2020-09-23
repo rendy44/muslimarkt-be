@@ -27,6 +27,11 @@ if ( ! class_exists( 'Muslimarkt\Model\Media' ) ) {
 
 		private $uploaded_file;
 
+		/**
+		 * Media constructor.
+		 *
+		 * @param array $file file that will be uploaded.
+		 */
 		public function __construct( $file ) {
 
 			// Require core file.

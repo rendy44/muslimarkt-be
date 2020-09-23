@@ -191,7 +191,7 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 							'remember'      => true,
 						);
 
-						// Do login;
+						// Do login.
 						$login = wp_signon( $credentials );
 
 						// Validate login.
@@ -340,7 +340,7 @@ if ( ! class_exists( 'Muslimarkt\Auth' ) ) {
 		 * @return bool|WP_User
 		 */
 		private function get_user_by_email( $email ) {
-			return get_user_by_email( $email );
+			return get_user_by( 'email', $email );
 		}
 
 		/**

@@ -41,7 +41,7 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 			// Hash.
 			$key = hash( 'sha256', $secret_key );
 
-			// iv - encrypt method AES-256-CBC expects 16 bytes
+			// iv - encrypt method AES-256-CBC expects 16 bytes.
 			$iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
 			if ( ! $is_decrypt ) {
 				$output = openssl_encrypt( $string, $encrypt_method, $key, 0, $iv );
@@ -181,31 +181,6 @@ if ( ! class_exists( 'Muslimarkt\Helper' ) ) {
 					self::save_user_meta( $key, $value, $user_id, $use_prefix );
 				}
 			}
-		}
-
-		/**
-		 * Validate user key.
-		 *
-		 * @param string $user_key user key.
-		 *
-		 * @return int|WP_Error
-		 */
-		public static function validate_user_key( $user_key ) {
-			// Convert user key into email.
-			$maybe_email = self::encrypt( $user_key, true );
-
-			// Find user by its email.
-			$found_user = get_user_by_email( $maybe_email );
-
-			// Validate the user.
-			if ( ! $found_user ) {
-				return new WP_Error( 'err_auth', __( 'Anda tidak diizinkan untuk melakukan aksi ini', 'muslimarkt' ) );
-			}
-
-			// Save the user.
-			wp_set_current_user( $found_user->ID );
-
-			return $found_user->ID;
 		}
 
 		/**

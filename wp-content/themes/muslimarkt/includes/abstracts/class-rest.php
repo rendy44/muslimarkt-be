@@ -95,35 +95,35 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Rest' ) ) {
 		 *
 		 * @param WP_REST_Request $request request object.
 		 */
-		abstract function get_callback( $request );
+		abstract public function get_callback( $request );
 
 		/**
 		 * Callback for getting detail method.
 		 *
 		 * @param WP_REST_Request $request request object.
 		 */
-		abstract function get_detail_callback( $request );
+		abstract public function get_detail_callback( $request );
 
 		/**
 		 * Callback for post method.
 		 *
 		 * @param WP_REST_Request $request request object.
 		 */
-		abstract function post_callback( $request );
+		abstract public function post_callback( $request );
 
 		/**
 		 * Callback for delete method.
 		 *
 		 * @param WP_REST_Request $request request object.
 		 */
-		abstract function delete_callback( $request );
+		abstract public function delete_callback( $request );
 
 		/**
 		 * Callback for put method.
 		 *
 		 * @param WP_REST_Request $request request object.
 		 */
-		abstract function put_callback( $request );
+		abstract public function put_callback( $request );
 
 		/**
 		 * Get list of method callbacks based on method configuration.
