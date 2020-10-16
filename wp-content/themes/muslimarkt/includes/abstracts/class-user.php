@@ -35,6 +35,16 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 		public $user;
 
 		/**
+		 * Base user fields variable.
+		 */
+		private $base_fields = array(
+			'user_key',
+			'is_profile_complete',
+			'active',
+			'type',
+		);
+
+		/**
 		 * User detail fields.
 		 *
 		 * @var array
@@ -78,6 +88,11 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\User' ) ) {
 					$this->items['display_name'] = $this->user->display_name;
 					$this->items['email']        = $this->user->user_email;
 					$this->items['avatar_url']   = get_avatar_url( $user_id );
+
+					// Get common user fields that will be used for all user types.
+					foreach ( $this->base_fields as $field ) {
+						$this->items[ $field ] = $this->get_meta( $field );
+					}
 
 					// Update result.
 					$this->is_error = false;

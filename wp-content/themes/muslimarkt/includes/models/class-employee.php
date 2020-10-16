@@ -92,6 +92,41 @@ if ( ! class_exists( 'Muslimarkt\Model\Employee' ) ) {
 		}
 
 		/**
+		 * Get user jobs.
+		 */
+		public function get_jobs() {
+			$jobs = new Query(
+				array(
+					'post_type' => 'job',
+					'author'    => $this->user->ID,
+					'order'     => 'ASC',
+				),
+				false
+			);
+
+			// Build the query.
+			$query = $jobs->get_query();
+
+			// Reset object.
+			$this->items = array();
+
+			// Loop the query.
+			while ( $query->have_posts() ) {
+				$query->the_post();
+
+				// Instance a new job.
+				$job = new Job( $this->user->ID, get_the_ID() );
+
+				// Load job details.
+				$job->get_details();
+
+				// Store job details.
+				$this->items[] = $job->items;
+			}
+			wp_reset_postdata();
+		}
+
+		/**
 		 * Get user educations.
 		 */
 		public function get_educations() {
