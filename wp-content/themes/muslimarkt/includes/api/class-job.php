@@ -144,8 +144,12 @@ if ( ! class_exists( 'Muslimarkt\Rest\Job' ) ) {
 			$auth->success_callback(
 				function () use ( $auth ) {
 
+					// Prepare post args.
+					$post_title = $auth->get_args( 'position' );
+					$post_name  = sanitize_title( $post_title );
+
 					// Create a new job.
-					$job = new \Muslimarkt\Model\Job( $auth->user_id );
+					$job = new \Muslimarkt\Model\Job( $auth->user_id, false, compact( 'post_title', 'post_name' ) );
 
 					// Save job's details.
 					$job->save_details( $auth->get_args() );
