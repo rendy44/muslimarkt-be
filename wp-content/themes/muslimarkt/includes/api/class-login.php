@@ -76,7 +76,7 @@ if ( ! class_exists( 'Muslimarkt\Rest\Login' ) ) {
 				function () use ( $auth ) {
 
 					// Check whether the user is employee or employer.
-					$employer = Helper::get_user_meta( 'recruiter', $auth->user_id );
+					$employer = mm_is_employer($auth->user_id);
 
 					// Validate whether user is employer.
 					if ( $employer ) {

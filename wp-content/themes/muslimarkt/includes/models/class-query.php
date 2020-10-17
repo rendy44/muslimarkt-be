@@ -30,7 +30,7 @@ if ( ! class_exists( 'Muslimarkt\Model\Query' ) ) {
 		 *
 		 * @var array
 		 */
-		private $args = array();
+		private $args;
 
 		/**
 		 * Query variable.

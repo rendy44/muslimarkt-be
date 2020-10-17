@@ -10,6 +10,8 @@
 namespace Muslimarkt\Abstracts;
 
 use Muslimarkt\Helper;
+use Muslimarkt\Model\Employee;
+use Muslimarkt\Model\Employer;
 use Muslimarkt\Result;
 use WP_Post;
 
@@ -51,9 +53,9 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 		/**
 		 * Post constructor.
 		 *
-		 * @param int                     $user_id id of the user.
+		 * @param int $user_id id of the user.
 		 * @param bool|string|int|WP_Post $post_tag object of WP_Post, id of the post or slug of the post.
-		 * @param array                   $args args to create post.
+		 * @param array $args args to create post.
 		 */
 		protected function __construct( $user_id, $post_tag = false, $args = array() ) {
 
@@ -153,7 +155,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 		 * Get post meta.
 		 *
 		 * @param string $key name of the meta.
-		 * @param bool   $single whether single meta or not.
+		 * @param bool $single whether single meta or not.
 		 *
 		 * @return mixed
 		 */
@@ -176,7 +178,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 		 * Save post meta.
 		 *
 		 * @param string $key name of the meta.
-		 * @param mixed  $value value of the meta.
+		 * @param mixed $value value of the meta.
 		 */
 		protected function save_meta( $key, $value ) {
 			Helper::save_post_meta( $key, $value, $this->post->ID );
@@ -212,7 +214,7 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 		}
 
 		/**
-		 * Get experience details.
+		 * Get post details.
 		 */
 		public function get_details() {
 
@@ -227,11 +229,36 @@ if ( ! class_exists( 'Muslimarkt\Abstracts\Post' ) ) {
 		}
 
 		/**
+		 * Get post's author details.
+		 */
+		public function get_user_details() {
+
+			$user_id = $this->items['author'];
+
+			// Check whether user is employer.
+			$employer = mm_is_employer( $user_id );
+
+			// Validate user.
+			if ( $employer ) {
+
+				// Instance a new employer.
+				$employer            = new Employer( $user_id );
+				$this->items['user'] = $employer->items;
+			} else {
+
+				// Instance a new employee.
+				$employee            = new Employee( $user_id );
+				$this->items['user'] = $employee->items;
+			}
+		}
+
+		/**
 		 * Get post base details.
 		 */
 		private function get_base_details() {
-			$this->items['id']   = $this->post->ID;
-			$this->items['slug'] = $this->post->post_name;
+			$this->items['id']     = $this->post->ID;
+			$this->items['slug']   = $this->post->post_name;
+			$this->items['author'] = $this->post->post_author;
 		}
 
 		/**
